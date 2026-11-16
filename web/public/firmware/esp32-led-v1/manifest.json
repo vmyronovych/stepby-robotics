@@ -1,0 +1,52 @@
+{
+  "format": 1,
+  "version": "esp32-led-v1",
+  "chip": "ESP32",
+  "flashBytes": 4194304,
+  "programAddress": 3211264,
+  "programSize": 65536,
+  "baudRate": 115200,
+  "core": "3.3.0",
+  "sources": [
+    {
+      "file": "firmware/browser/browser.ino",
+      "sha256": "4e9f3b72d4ec3746210f1f324232389083ec56bca270cf75720dc65c43b74929"
+    },
+    {
+      "file": "firmware/browser/usb_vm.h",
+      "sha256": "d9eeb1a44dc127a6d7455321bb6abd1cc25612f5d84b931e6619bfbf4b899377"
+    },
+    {
+      "file": "firmware/browser/partitions.csv",
+      "sha256": "7c0b01ddc75d5c6676e672863e11ce3407e2b954633f7eef05e9570904fa1d11"
+    },
+    {
+      "file": "firmware/browser/gpio_runtime.h",
+      "sha256": "ce269c93720429937ce8c4398fd6688c87477464a6a0561ec43843e8e50d7ac9"
+    },
+    {
+      "file": "web/src/usb-gpio-source.js",
+      "sha256": "6043c2a7bfd23087118fc6db07317cfa7682540f1da6ba0477cd769053f1fd0a"
+    }
+  ],
+  "files": [
+    {
+      "file": "bootloader.bin",
+      "address": 4096,
+      "size": 25168,
+      "sha256": "17a546b0b936fce668e35c8428b1806f9cb9e09f41f7eb86613cff68dfab8f2e"
+    },
+    {
+      "file": "partitions.bin",
+      "address": 32768,
+      "size": 3072,
+      "sha256": "9dcbf90c23c91346abd15c2f342550b6cc6331166762a6f42e39532e8df55862"
+    },
+    {
+      "file": "runtime.bin",
+      "address": 65536,
+      "size": 322576,
+      "sha256": "82383b2554b94708e4f5cae10c0b6217ec6c260ad5623bd8f03d0c6a99397fd8"
+    }
+  ]
+}

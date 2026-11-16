@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-14",
+  "source": "User photograph and measurements in conversation",
+  "photo": "chassis-top-2026-10-14.png",
+  "reported_plate_length_mm": 255,
+  "reported_plate_width_mm": 150,
+  "measurement_extent_confirmation": "pending: maximum plate envelope excluding wheels",
+  "upper_and_lower_identical": true,
+  "plate_thickness_mm": 3,
+  "outline_xy_mm": null,
+  "cutouts_xy_mm": null,
+  "support_holes_xy_mm": null,
+  "plate_gap_mm": 30,
+  "front_direction": null,
+  "photo_orientation": "A = top end of supplied photograph; B = bottom end. Neither is assigned as robot front.",
+  "photo_landmarks_px": {
+    "P1_top_left_visible_screw": [
+      355,
+      210
+    ],
+    "P2_top_right_visible_screw": [
+      978,
+      198
+    ],
+    "P3_bottom_left_visible_screw": [
+      415,
+      1407
+    ],
+    "P4_bottom_right_visible_screw": [
+      991,
+      1377
+    ]
+  },
+  "landmarks_status": "Approximate image annotation only; not millimetre coordinates or inferred hole diameters. Confirm screw purpose from side view.",
+  "legacy_model_status": "REJECTED_CHASSIS_GEOMETRY: capsule outline 220 x 150 mm, support and motor locations are not supported by the actual photograph. Do not use legacy model/PDF for mechanical assembly.",
+  "next_input": "Final loaded clearance and retention after double-sided tape mounting; exact mounting coordinates remain unknown",
+  "followup_2026_10_15": {
+    "photos": [
+      "2026-10-15/01-length.png",
+      "2026-10-15/02-width-centre.png",
+      "2026-10-15/03-width-end.png",
+      "2026-10-15/04-length-upper.png",
+      "2026-10-15/05-length-middle.png",
+      "2026-10-15/06-slot-closeup.png",
+      "2026-10-15/07-slot-closeup.png"
+    ],
+    "trace": "../sources/chassis-photo-trace.json",
+    "status": "PHOTO_TRACE_NOT_MEASURED_CAD",
+    "openings": 72,
+    "remaining_required": [
+      "tape thickness and final loaded clearance",
+      "motor/support mounting measurements"
+    ]
+  },
+  "vertical_measurement_source": "User message 2026-10-15: thickness 3 mm, clear height 3 cm",
+  "battery_measurements": "../sources/battery-measurements.json"
+}

@@ -1,0 +1,72 @@
+{
+  "format": 1,
+  "version": "esp32-gpio-v2",
+  "chip": "ESP32",
+  "flashBytes": 4194304,
+  "programAddress": 3211264,
+  "programSize": 65536,
+  "baudRate": 115200,
+  "core": "3.3.0",
+  "sources": [
+    {
+      "file": "firmware/browser/browser.ino",
+      "sha256": "1d61c795fdb1654a83f842eb6da5d86e1120064ce3490b48224c66c26d93c29c"
+    },
+    {
+      "file": "firmware/browser/remote_wifi.h",
+      "sha256": "9863c0ca865527797bb866656364ccbc2b03f5872db55b44f8255edc9a1597bc"
+    },
+    {
+      "file": "firmware/browser/remote_control.h",
+      "sha256": "582d88715349265eba2025a714e2228dd3242592ee558c05d25a25e43a23e3da"
+    },
+    {
+      "file": "firmware/browser/remote_page.h",
+      "sha256": "e6d29c7f5bfabd184549a961ceb28730e60f13d0c84ab353a5668164e2cfb00c"
+    },
+    {
+      "file": "firmware/browser/usb_vm.h",
+      "sha256": "b0c2955c0bf9e2f2c423c8cacb5ed598b879be18fb108b8bcb36373c52deaad6"
+    },
+    {
+      "file": "firmware/browser/program_store.h",
+      "sha256": "202e8cf9807df418bfee8b01633c85e2c913f18660cf3773dc5fe5a09bf22640"
+    },
+    {
+      "file": "firmware/browser/usb_receiver.h",
+      "sha256": "de07db53aafab558038fa15f4b3789b39b460fc596075c9aba8a1b026770abf8"
+    },
+    {
+      "file": "firmware/browser/partitions.csv",
+      "sha256": "7c0b01ddc75d5c6676e672863e11ce3407e2b954633f7eef05e9570904fa1d11"
+    },
+    {
+      "file": "firmware/browser/gpio_runtime.h",
+      "sha256": "ce269c93720429937ce8c4398fd6688c87477464a6a0561ec43843e8e50d7ac9"
+    },
+    {
+      "file": "web/src/usb-gpio-source.js",
+      "sha256": "6043c2a7bfd23087118fc6db07317cfa7682540f1da6ba0477cd769053f1fd0a"
+    }
+  ],
+  "files": [
+    {
+      "file": "bootloader.bin",
+      "address": 4096,
+      "size": 25168,
+      "sha256": "17a546b0b936fce668e35c8428b1806f9cb9e09f41f7eb86613cff68dfab8f2e"
+    },
+    {
+      "file": "partitions.bin",
+      "address": 32768,
+      "size": 3072,
+      "sha256": "9dcbf90c23c91346abd15c2f342550b6cc6331166762a6f42e39532e8df55862"
+    },
+    {
+      "file": "runtime.bin",
+      "address": 65536,
+      "size": 989792,
+      "sha256": "b219ece18c2ac7d96d1a6c2592cd097266ebf54708224c8c58ee9ce48d3c2bd2"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "format": "mandrivnyk",
+  "version": 2,
+  "name": "Перша подорож",
+  "workspace": {
+    "blocks": {
+      "languageVersion": 0,
+      "blocks": [
+        {
+          "type": "robot_start",
+          "next": {
+            "block": {
+              "type": "robot_speed",
+              "inputs": {
+                "SPEED": {
+                  "shadow": {
+                    "type": "math_number",
+                    "fields": {
+                      "NUM": 80
+                    }
+                  }
+                }
+              },
+              "next": {
+                "block": {
+                  "type": "robot_move",
+                  "fields": {
+                    "DIR": "F"
+                  },
+                  "inputs": {
+                    "TIME": {
+                      "shadow": {
+                        "type": "math_number",
+                        "fields": {
+                          "NUM": 2
+                        }
+                      }
+                    }
+                  },
+                  "next": {
+                    "block": {
+                      "type": "robot_stop"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "x": 65,
+          "y": 45
+        }
+      ]
+    }
+  }
+}

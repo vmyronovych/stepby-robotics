@@ -1,0 +1,60 @@
+.usb-app .usb-device{width:100%;text-align:left;font:inherit;cursor:pointer;border:1px solid transparent;border-radius:18px;padding:12px;margin:4px 0 12px;background:transparent;transition:background .15s,border-color .15s}
+.usb-app .usb-device:hover{background:#f1f6ef;border-color:#c9d9ce}
+.usb-app .usb-device:focus-visible{outline:3px solid #238b89;outline-offset:3px}
+.usb-app .usb-device-copy small{color:#257874;font-weight:600}
+.pin-dialog{box-sizing:border-box;width:min(1120px,calc(100vw - 32px));max-width:none;max-height:calc(100dvh - 32px);border:1px solid #dce4dc;border-radius:24px;background:#fcfcf8;padding:0;color:#293b40;box-shadow:0 24px 100px #18352a33;font-family:inherit}
+.pin-dialog::backdrop{background:#162d3580;backdrop-filter:blur(5px)}
+.pin-dialog button,.pin-dialog select{font:inherit;cursor:pointer}
+.pin-dialog button:focus-visible,.pin-dialog select:focus-visible,.pin-dialog input:focus-visible{outline:3px solid #d9a739;outline-offset:3px}
+.pin-header{display:flex;justify-content:space-between;gap:16px;padding:24px 28px 20px;border-bottom:1px solid #e2e8df;background:white;position:sticky;top:0;z-index:5}
+.pin-eyebrow{font-size:10px;font-weight:800;letter-spacing:1.5px;color:#668076}
+.pin-header h2{font-size:27px;line-height:1.25;margin:6px 0}
+.pin-header p{font-size:14px;margin:0;color:#667971}
+.pin-close{align-self:flex-start;flex-shrink:0;width:42px;height:42px;background:#f0f3ed;border:0;border-radius:50%;font-size:28px!important;color:#455a51}
+.pin-layout{display:grid;grid-template-columns:minmax(360px,1fr) 355px}
+.pin-visual{min-width:0;padding:16px 18px 20px;background:radial-gradient(ellipse at center,#fff 20%,#f1f4ee 100%)}
+.pin-view-tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center;font-size:11px;color:#6c7a71}
+.pin-view-tools span{flex-basis:100%;text-align:center;margin-bottom:4px}
+.pin-view-tools button{padding:7px 12px;border:1px solid #dce4d8;background:#fff;border-radius:20px;font-size:12px}
+.usb-pin-view{height:570px;position:relative;isolation:isolate;max-width:600px;margin:0 auto;overflow:hidden}
+.usb-pin-view .module-canvas{display:block;width:100%;height:100%;touch-action:none}
+.usb-pin-view .module-pins{position:absolute;inset:0;pointer-events:none}
+.usb-pin-view .module-pin{position:absolute;transform:translate(-50%,-50%);padding:0!important;border:2px solid #fff;border-radius:50%;background:var(--pin-color);box-shadow:0 0 0 1px #64776c55;pointer-events:auto;z-index:1}
+.usb-pin-view .module-pin span{display:block;position:absolute;left:19px;top:50%;transform:translateY(-50%);background:#ffffffed;color:#344c43;border:1px solid #dce5dc;padding:3px 7px;border-radius:5px;font:600 11px ui-monospace,monospace;white-space:nowrap;min-width:48px;text-align:left;pointer-events:auto}
+.usb-pin-view .module-pin.label-left span{left:auto;right:19px;text-align:right}
+.usb-pin-view .module-pin[aria-pressed=true],.usb-pin-view .module-pin:hover{outline:3px solid #e8b743;outline-offset:2px;z-index:3}
+.usb-pin-view .module-pin[aria-pressed=true] span{background:#ffe9a3;border-color:#cf982c;color:#4d3815}
+.usb-pin-view .module-pin[hidden]{display:none}
+.usb-pin-view .module-flat{position:absolute;inset:55px 90px 35px;border-radius:10px}
+.usb-pin-view .module-flat .module-pin{width:14px;height:14px}
+.usb-pin-view .module-flat .module-pin span{left:auto;right:17px}
+.usb-pin-view .module-flat .module-pin:nth-child(n+20) span{right:auto;left:17px}
+.module-fallback-note{font-size:12px;text-align:center}
+.pin-legend{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;font-size:11px;color:#5b7167}
+.pin-legend span:before{content:'';display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px;background:var(--dot)}
+.pin-gesture{text-align:center;color:#7a867e;font-size:11px;margin:12px 0 0}
+.pin-inspector{padding:24px;background:#fff;border-left:1px solid #e2e8df;min-width:0;scroll-margin-top:150px}
+.pin-identity{display:flex;gap:14px;align-items:center}
+.pin-identity>span{width:52px;height:52px;display:grid;place-items:center;font-size:28px;background:#e7f2eb;border-radius:15px;color:#238b89}
+.pin-identity h3{font-size:28px;margin:4px 0 0;line-height:1.1}
+.pin-inspector>p{font-size:13px;line-height:1.5;color:#5f7368;margin:16px 0}
+.pin-warning{border-left:3px solid #e6c575;padding:8px 10px;background:#fff9e9;color:#7b6532!important;font-size:11px!important;border-radius:0 8px 8px 0}
+.pin-actions{display:grid;gap:7px;margin:18px 0}
+.pin-action{display:flex;align-items:center;gap:10px;text-align:left;border:1px solid #dce6de;border-radius:12px;padding:10px;background:#fff;color:#344d44}
+.pin-action>span:first-child{font-size:24px;width:30px;text-align:center}
+.pin-action strong{display:block;font-size:13px}.pin-action small{display:block;font-size:11px;color:#7b8b80;margin-top:3px}
+.pin-action .pin-radio{margin-left:auto;border:1px solid #bacdc2;border-radius:50%;width:15px;height:15px;flex-shrink:0}
+.pin-action[aria-pressed=true]{border-color:#268d80;background:#f0f8f3;box-shadow:0 0 0 1px #268d8022}
+.pin-action[aria-pressed=true] .pin-radio{border:4px solid #268d80;background:#fff}
+.pin-settings{font-size:13px;color:#4e685a;margin:16px 0}.pin-settings label{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.pin-settings select{border:1px solid #cbd9cd;border-radius:8px;padding:8px;background:white;color:#345b4e;font-size:12px;max-width:190px}
+.pin-settings input{width:100%;margin:15px 0 0;accent-color:#268d80}.pin-settings p{font-size:12px;line-height:1.5}
+.pin-wire{display:flex;justify-content:space-between;align-items:center;gap:4px;border:1px solid #dce6de;border-radius:10px;padding:12px 8px;font-size:12px}.pin-wire span{text-align:center}.pin-wire small{display:block;font-size:10px;color:#7b8b80}
+.pin-block-preview{background:#238b89;color:white;border-radius:7px;padding:12px;font-size:12px;font-weight:700;line-height:1.6;margin:16px 0;position:relative;overflow-wrap:anywhere}
+.pin-block-preview:before{content:'';width:22px;height:6px;background:#238b89;position:absolute;bottom:-5px;left:16px;border-radius:0 0 4px 4px}
+.pin-add{background:#ead08b;color:#3c382a;border:0;border-radius:12px;width:100%;font-weight:700!important;min-height:46px;padding:10px 8px;font-size:14px!important}.pin-add:hover{background:#e6c36a}
+.pin-placement{font-size:11px!important;color:#819085!important}.pin-voltage{border-top:1px solid #e5ebe3;padding-top:12px;font-size:11px!important}
+.pin-offline{margin:5px;padding:8px;border:1px solid #cbd9cd;border-radius:6px}
+@media(min-width:900px) and (min-height:950px){.usb-pin-view{height:630px}}
+@media(max-width:740px){.pin-dialog{width:calc(100vw - 16px);max-height:calc(100dvh - 16px);border-radius:18px}.pin-header{padding:18px 16px}.pin-header h2{font-size:21px}.pin-header p{font-size:12px}.pin-layout{grid-template-columns:1fr}.pin-visual{padding:14px 6px}.usb-pin-view{height:550px}.pin-inspector{border-left:0;border-top:1px solid #e2e8df;padding:20px}.pin-view-tools{font-size:10px}.pin-legend{gap:9px;font-size:10px}}
+@media(prefers-reduced-motion:reduce){.usb-app .usb-device{transition:none}}

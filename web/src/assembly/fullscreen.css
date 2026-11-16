@@ -1,0 +1,17 @@
+.model-fullscreen-toggle{white-space:nowrap}
+.model-only-fullscreen{display:none!important}
+.model-fullscreen{box-sizing:border-box;position:fixed!important;inset:0!important;width:100%!important;height:100dvh!important;max-width:none!important;max-height:none!important;min-height:0!important;margin:0!important;padding:16px!important;background:#f5f3ee;z-index:10000;display:flex!important;flex-direction:column!important;gap:10px!important;overflow:auto;font-family:system-ui,sans-serif;color:#233445}
+.model-fullscreen::backdrop{background:#f5f3ee}
+.model-fullscreen .model-only-fullscreen{display:inline-flex!important}
+.model-fullscreen .guide-viewer{flex:1 1 0!important;height:auto!important;min-height:120px!important}
+.model-fullscreen .guide-view-tools,.model-fullscreen .guide-model-actions{flex-shrink:0}
+.model-fullscreen .guide-gestures{display:none}
+.guide-model-actions{flex-wrap:wrap}
+.chassis-presentation #chassis3d{height:420px;max-height:60vh;border-radius:16px;overflow:hidden;touch-action:none}
+.chassis-presentation canvas{display:block}
+.model-fullscreen #chassis3d{flex:1 1 0;height:auto!important;max-height:none!important;min-height:120px}
+.model-fullscreen .tools{flex-shrink:0;margin:0;gap:8px}
+.model-fullscreen h2{flex-shrink:0;margin:0;font-size:18px}
+.model-fullscreen button:focus-visible{outline:3px solid #3275bb;outline-offset:2px}
+@media(max-width:650px){.model-fullscreen{padding:8px!important;gap:8px!important}.model-fullscreen .tools{gap:6px;font-size:12px}.model-fullscreen .tools button{padding:8px 10px}.model-fullscreen .guide-model-actions{padding:0;gap:6px}.model-fullscreen .guide-model-actions button{padding:9px 10px}}
+@media(max-height:480px){.model-fullscreen{padding:6px!important;gap:4px!important}.model-fullscreen h2,.model-fullscreen .guide-selection,.model-fullscreen .guide-legend{display:none}.model-fullscreen .guide-view-tools button{height:30px}.model-fullscreen .guide-model-actions button{padding:6px 10px}}

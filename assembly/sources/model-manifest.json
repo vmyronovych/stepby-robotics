@@ -1,0 +1,1597 @@
+[
+  {
+    "id": "lower",
+    "stage": 1,
+    "faces": 4085
+  },
+  {
+    "id": "motor0",
+    "stage": 2,
+    "faces": 6
+  },
+  {
+    "id": "motorcan0",
+    "stage": 2,
+    "faces": 6
+  },
+  {
+    "id": "shaft0",
+    "stage": 2,
+    "faces": 22
+  },
+  {
+    "id": "retainer0-1",
+    "stage": 2,
+    "faces": 6
+  },
+  {
+    "id": "retainer01",
+    "stage": 2,
+    "faces": 6
+  },
+  {
+    "id": "wheel0",
+    "stage": 4,
+    "faces": 34
+  },
+  {
+    "id": "hub0",
+    "stage": 4,
+    "faces": 26
+  },
+  {
+    "id": "hubcap0",
+    "stage": 4,
+    "faces": 22
+  },
+  {
+    "id": "motor1",
+    "stage": 3,
+    "faces": 6
+  },
+  {
+    "id": "motorcan1",
+    "stage": 3,
+    "faces": 6
+  },
+  {
+    "id": "shaft1",
+    "stage": 3,
+    "faces": 22
+  },
+  {
+    "id": "retainer1-1",
+    "stage": 3,
+    "faces": 6
+  },
+  {
+    "id": "retainer11",
+    "stage": 3,
+    "faces": 6
+  },
+  {
+    "id": "wheel1",
+    "stage": 4,
+    "faces": 34
+  },
+  {
+    "id": "hub1",
+    "stage": 4,
+    "faces": 26
+  },
+  {
+    "id": "hubcap1",
+    "stage": 4,
+    "faces": 22
+  },
+  {
+    "id": "motor2",
+    "stage": 3,
+    "faces": 6
+  },
+  {
+    "id": "motorcan2",
+    "stage": 3,
+    "faces": 6
+  },
+  {
+    "id": "shaft2",
+    "stage": 3,
+    "faces": 22
+  },
+  {
+    "id": "retainer2-1",
+    "stage": 3,
+    "faces": 6
+  },
+  {
+    "id": "retainer21",
+    "stage": 3,
+    "faces": 6
+  },
+  {
+    "id": "wheel2",
+    "stage": 4,
+    "faces": 34
+  },
+  {
+    "id": "hub2",
+    "stage": 4,
+    "faces": 26
+  },
+  {
+    "id": "hubcap2",
+    "stage": 4,
+    "faces": 22
+  },
+  {
+    "id": "motor3",
+    "stage": 3,
+    "faces": 6
+  },
+  {
+    "id": "motorcan3",
+    "stage": 3,
+    "faces": 6
+  },
+  {
+    "id": "shaft3",
+    "stage": 3,
+    "faces": 22
+  },
+  {
+    "id": "retainer3-1",
+    "stage": 3,
+    "faces": 6
+  },
+  {
+    "id": "retainer31",
+    "stage": 3,
+    "faces": 6
+  },
+  {
+    "id": "wheel3",
+    "stage": 4,
+    "faces": 34
+  },
+  {
+    "id": "hub3",
+    "stage": 4,
+    "faces": 26
+  },
+  {
+    "id": "hubcap3",
+    "stage": 4,
+    "faces": 22
+  },
+  {
+    "id": "post0",
+    "stage": 5,
+    "faces": 8
+  },
+  {
+    "id": "postbolt0",
+    "stage": 5,
+    "faces": 22
+  },
+  {
+    "id": "post1",
+    "stage": 5,
+    "faces": 8
+  },
+  {
+    "id": "postbolt1",
+    "stage": 5,
+    "faces": 22
+  },
+  {
+    "id": "post2",
+    "stage": 5,
+    "faces": 8
+  },
+  {
+    "id": "postbolt2",
+    "stage": 5,
+    "faces": 22
+  },
+  {
+    "id": "post3",
+    "stage": 5,
+    "faces": 8
+  },
+  {
+    "id": "postbolt3",
+    "stage": 5,
+    "faces": 22
+  },
+  {
+    "id": "batteryEnvelope",
+    "stage": 6,
+    "faces": 6
+  },
+  {
+    "id": "bracketTop",
+    "stage": 7,
+    "faces": 6
+  },
+  {
+    "id": "bracketWall",
+    "stage": 7,
+    "faces": 6
+  },
+  {
+    "id": "bracketFoot",
+    "stage": 7,
+    "faces": 6
+  },
+  {
+    "id": "sensor",
+    "stage": 8,
+    "faces": 6
+  },
+  {
+    "id": "optics",
+    "stage": 8,
+    "faces": 6
+  },
+  {
+    "id": "optics",
+    "stage": 8,
+    "faces": 6
+  },
+  {
+    "id": "optics",
+    "stage": 8,
+    "faces": 6
+  },
+  {
+    "id": "optics",
+    "stage": 8,
+    "faces": 6
+  },
+  {
+    "id": "optics",
+    "stage": 8,
+    "faces": 6
+  },
+  {
+    "id": "sensorclip",
+    "stage": 8,
+    "faces": 6
+  },
+  {
+    "id": "sensorclip",
+    "stage": 8,
+    "faces": 6
+  },
+  {
+    "id": "upper",
+    "stage": 9,
+    "faces": 4085
+  },
+  {
+    "id": "upperthumb0",
+    "stage": 9,
+    "faces": 18
+  },
+  {
+    "id": "upperthumb1",
+    "stage": 9,
+    "faces": 18
+  },
+  {
+    "id": "upperthumb2",
+    "stage": 9,
+    "faces": 18
+  },
+  {
+    "id": "upperthumb3",
+    "stage": 9,
+    "faces": 18
+  },
+  {
+    "id": "expansionpost",
+    "stage": 10,
+    "faces": 8
+  },
+  {
+    "id": "expansionboltLower",
+    "stage": 10,
+    "faces": 22
+  },
+  {
+    "id": "expansionpost",
+    "stage": 10,
+    "faces": 8
+  },
+  {
+    "id": "expansionboltLower",
+    "stage": 10,
+    "faces": 22
+  },
+  {
+    "id": "expansionpost",
+    "stage": 10,
+    "faces": 8
+  },
+  {
+    "id": "expansionboltLower",
+    "stage": 10,
+    "faces": 22
+  },
+  {
+    "id": "expansionpost",
+    "stage": 10,
+    "faces": 8
+  },
+  {
+    "id": "expansionboltLower",
+    "stage": 10,
+    "faces": 22
+  },
+  {
+    "id": "expansion",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionscrew",
+    "stage": 10,
+    "faces": 22
+  },
+  {
+    "id": "expansionscrew",
+    "stage": 10,
+    "faces": 22
+  },
+  {
+    "id": "expansionscrew",
+    "stage": 10,
+    "faces": 22
+  },
+  {
+    "id": "expansionscrew",
+    "stage": 10,
+    "faces": 22
+  },
+  {
+    "id": "espsocket",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "socketOpening",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "socketOpening",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "socketOpening",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "socketOpening",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "socketOpening",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "socketOpening",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "socketOpening",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "socketOpening",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "socketOpening",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "socketOpening",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "socketOpening",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "socketOpening",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "socketOpening",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "socketOpening",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "socketOpening",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "espsocket",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "socketOpening",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "socketOpening",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "socketOpening",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "socketOpening",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "socketOpening",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "socketOpening",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "socketOpening",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "socketOpening",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "socketOpening",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "socketOpening",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "socketOpening",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "socketOpening",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "socketOpening",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "socketOpening",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "socketOpening",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionHeaderBase",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionPin",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionDC",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionDCopening",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionMicroUSB",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionTypeC",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionRegulator",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "expansionCap",
+    "stage": 10,
+    "faces": 22
+  },
+  {
+    "id": "expansionCap",
+    "stage": 10,
+    "faces": 22
+  },
+  {
+    "id": "voltageJumper",
+    "stage": 10,
+    "faces": 6
+  },
+  {
+    "id": "esp",
+    "stage": 11,
+    "faces": 6
+  },
+  {
+    "id": "espShield",
+    "stage": 11,
+    "faces": 6
+  },
+  {
+    "id": "antenna",
+    "stage": 11,
+    "faces": 6
+  },
+  {
+    "id": "usb",
+    "stage": 11,
+    "faces": 6
+  },
+  {
+    "id": "espUART",
+    "stage": 11,
+    "faces": 6
+  },
+  {
+    "id": "espButton",
+    "stage": 11,
+    "faces": 6
+  },
+  {
+    "id": "espButton",
+    "stage": 11,
+    "faces": 6
+  },
+  {
+    "id": "driverMount0",
+    "stage": 12,
+    "faces": 6
+  },
+  {
+    "id": "driversocket",
+    "stage": 12,
+    "faces": 6
+  },
+  {
+    "id": "driver0",
+    "stage": 12,
+    "faces": 6
+  },
+  {
+    "id": "driverchip0",
+    "stage": 12,
+    "faces": 6
+  },
+  {
+    "id": "drivercap0",
+    "stage": 12,
+    "faces": 22
+  },
+  {
+    "id": "driverMount1",
+    "stage": 12,
+    "faces": 6
+  },
+  {
+    "id": "driversocket",
+    "stage": 12,
+    "faces": 6
+  },
+  {
+    "id": "driver1",
+    "stage": 12,
+    "faces": 6
+  },
+  {
+    "id": "driverchip1",
+    "stage": 12,
+    "faces": 6
+  },
+  {
+    "id": "drivercap1",
+    "stage": 12,
+    "faces": 22
+  },
+  {
+    "id": "regMount",
+    "stage": 13,
+    "faces": 6
+  },
+  {
+    "id": "regulator",
+    "stage": 13,
+    "faces": 6
+  },
+  {
+    "id": "inductor",
+    "stage": 13,
+    "faces": 6
+  },
+  {
+    "id": "switchMount",
+    "stage": 13,
+    "faces": 6
+  },
+  {
+    "id": "switch",
+    "stage": 13,
+    "faces": 6
+  },
+  {
+    "id": "buttonMount",
+    "stage": 13,
+    "faces": 6
+  },
+  {
+    "id": "button",
+    "stage": 13,
+    "faces": 6
+  },
+  {
+    "id": "cell0",
+    "stage": 18,
+    "faces": 22
+  },
+  {
+    "id": "cell1",
+    "stage": 18,
+    "faces": 22
+  },
+  {
+    "id": "cell2",
+    "stage": 18,
+    "faces": 22
+  },
+  {
+    "id": "cell3",
+    "stage": 18,
+    "faces": 22
+  }
+]

@@ -1,0 +1,191 @@
+{
+  "status": "ILLUSTRATIVE_NOT_FOR_MANUFACTURE",
+  "units": "mm",
+  "axes": "x right, y toward photo end A (display front), z up; origin at lower plate underside",
+  "chassis_source": "https://arduinokit.com.ua/ua/p1237245395-akrilovaya-platforma-shassi.html",
+  "measured": {
+    "plate_length": 255,
+    "plate_width": 150,
+    "plate_thickness": 3,
+    "plate_outline_xy": null,
+    "post_centres_xy": null,
+    "clear_gap": 30,
+    "wheel_diameter": null,
+    "wheel_width": null,
+    "axle_centres_xyz": null,
+    "battery_size_xyz": [
+      58,
+      62,
+      18
+    ],
+    "battery_mount_slots_xy": null,
+    "motor_size_xyz": null,
+    "motor_mount_holes": null,
+    "front_bracket_holes_xy": null,
+    "sensor_holes_xy": null,
+    "ground_clearance": null,
+    "expansion_mount_holes_xy": null,
+    "esp_socket_spacing": null,
+    "electronics_mounts_xy": null
+  },
+  "illustrative": {
+    "plate_length": 220,
+    "plate_width": 150,
+    "plate_thickness": 3,
+    "lower_bottom_z": 19,
+    "clear_gap": 40,
+    "post_centres_xy": [
+      [
+        -40,
+        -80
+      ],
+      [
+        40,
+        -80
+      ],
+      [
+        -40,
+        80
+      ],
+      [
+        40,
+        80
+      ]
+    ],
+    "wheel_diameter": 65,
+    "wheel_width": 26,
+    "axle_centres_xyz": [
+      [
+        -91,
+        55,
+        32.5
+      ],
+      [
+        91,
+        55,
+        32.5
+      ],
+      [
+        -91,
+        -55,
+        32.5
+      ],
+      [
+        91,
+        -55,
+        32.5
+      ]
+    ],
+    "motor_size_xyz": [
+      24,
+      54,
+      25
+    ],
+    "battery_size_xyz": [
+      62,
+      64,
+      30
+    ],
+    "sensor_centre_y": 121,
+    "sensor_optical_face_z": 5,
+    "expansion_post_height": 10,
+    "expansion_size_xyz": [
+      51,
+      66,
+      1.6
+    ],
+    "expansion_centre_xy": [
+      -17,
+      -15
+    ],
+    "expansion_mount_centres_xy": [
+      [
+        -38,
+        -44
+      ],
+      [
+        4,
+        -44
+      ],
+      [
+        -38,
+        14
+      ],
+      [
+        4,
+        14
+      ]
+    ],
+    "esp_size_xyz": [
+      28,
+      52,
+      1.6
+    ],
+    "esp_socket_spacing": 22.86
+  },
+  "verified_module_envelopes": {
+    "driver_pololu_2130_xy": [
+      12.7,
+      20.3
+    ],
+    "sensor_pololu_4245_xyz": [
+      37,
+      20,
+      2.5
+    ],
+    "regulator_pololu_4082_xyz": [
+      22.9,
+      22.9,
+      9.7
+    ]
+  },
+  "teacher_design": {
+    "bracket_foot_xyz": [
+      45,
+      25,
+      3
+    ],
+    "bracket_upper_holes": "TBD: transfer two actual chassis holes",
+    "bracket_lower_holes": "TBD: inspect actual QTR-MD-05A",
+    "screw_lengths": "TBD: thickness + washer + 4 to 6 mm thread engagement"
+  },
+  "seller_reported_envelopes": {
+    "expansion_101712_xy": [
+      51,
+      66
+    ],
+    "source": "https://prom.ua/ua/p2000841069-plata-rasshireniya-esp32.html",
+    "basis": "Size labels on seller photograph, not a measured sample; orientation x=51, y=66."
+  },
+  "measured_source": "User measurements 2026-10-14/15; outline remains photo-estimated in chassis-photo-trace.json. Legacy illustrative block is archived and not updated silently.",
+  "assembly_display": {
+    "status": "SCHEMATIC_COMPONENT_PLACEMENT_NOT_MEASURED",
+    "axle_centres_xyz": [
+      [
+        -66,
+        55,
+        11
+      ],
+      [
+        66,
+        55,
+        11
+      ],
+      [
+        -66,
+        -55,
+        11
+      ],
+      [
+        66,
+        -55,
+        11
+      ]
+    ],
+    "sensor_centre_y": 141,
+    "sensor_optical_face_z": -16.5,
+    "floor_z": -21.5,
+    "floor_basis": "Schematic wheel contact plane only; does not verify battery or sensor clearance.",
+    "front_basis": "Photo end A chosen as display front; actual front and all component mounts remain unmeasured."
+  }
+}

@@ -1,0 +1,7 @@
+.usb-console{flex:none;border-top:1px solid #dce5de;background:#f3f6f1;color:#294b40}
+.usb-console summary{cursor:pointer;padding:10px 16px;font-weight:700;font-size:13px}
+.usb-console-tools{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 16px 8px;font-size:12px}
+.usb-console-tools button{border:1px solid #bccfc4;border-radius:7px;background:white;padding:6px 12px;color:#294b40;cursor:pointer}
+.usb-console-output{height:145px;overflow:auto;background:#1e3031;color:#dcefe4;font:13px/1.6 monospace;padding:10px 16px;white-space:pre-wrap;overflow-wrap:anywhere}
+.usb-console-output:empty::before{content:'Повідомлення блока «вивести в консоль» з’являться тут.';color:#a9c1b4}
+.usb-app .editor-panel:has(.usb-console[open]){min-height:590px}

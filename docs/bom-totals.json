@@ -1,0 +1,24 @@
+{
+  "perRobot": 7513.2,
+  "charger": 1500,
+  "quantities": [
+    {
+      "robots": 1,
+      "robotParts": 7513.2,
+      "chargers": 1,
+      "total": 9013.2
+    },
+    {
+      "robots": 5,
+      "robotParts": 37566,
+      "chargers": 1,
+      "total": 39066
+    },
+    {
+      "robots": 10,
+      "robotParts": 75132,
+      "chargers": 2,
+      "total": 78132
+    }
+  ]
+}

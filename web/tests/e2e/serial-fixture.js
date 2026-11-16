@@ -1,0 +1,9 @@
+export async function installSerial(page,options={}){
+ await page.addInitScript(({granted=false,legacy=false,cancel=false,unsupported=false})=>{
+  let connected=granted,authorized=granted,controller,open=false;const listeners={},commands=[];let checksum='',offset=0,openedCount=0,closedCount=0;
+  const send=line=>controller.enqueue(new TextEncoder().encode(line+'\n'));
+  const port={getInfo:()=>({usbVendorId:0x10c4,usbProductId:0xea60}),async open(){if(open)throw new DOMException('busy','InvalidStateError');open=true;openedCount++;this.readable=new ReadableStream({start:c=>{controller=c;if(legacy)send('LED2=ON ms=9533');},cancel:()=>{}});this.writable=new WritableStream({write:bytes=>{const line=new TextDecoder().decode(bytes).trim(),p=line.split(' ');commands.push(line);if(legacy)return;const nonce=p[2];if(p[1]==='HELLO')send(`MCAR2 READY ${nonce} gpio2-v5 16400`);if(p[1]==='BEGIN'){checksum=p[4];offset=0;send(`MCAR2 ACCEPT ${nonce} 0`);}if(p[1]==='DATA'){offset+=p[4].length/2;send(`MCAR2 ACK ${nonce} ${offset}`);}if(p[1]==='COMMIT'){send(`MCAR2 SAVED ${nonce} ${checksum}`);send(`MCAR2 RUNNING ${nonce} ${checksum}`);}}});},async setSignals(){},async close(){open=false;closedCount++;}};
+  window.serialFixture={commands,stats:()=>({openedCount,closedCount,open}),silence(){legacy=true;},emit:send,connect(){connected=true;if(authorized)listeners.connect?.forEach(fn=>fn({target:port}));},disconnect(){connected=false;if(open)controller.error(Error('USB disconnected'));listeners.disconnect?.forEach(fn=>fn({target:port}));},ready(){legacy=false;}};
+  Object.defineProperty(navigator,'serial',{configurable:true,value:unsupported?undefined:{getPorts:async()=>connected&&authorized?[port]:[],requestPort:async()=>{if(cancel)throw new DOMException('cancel','NotFoundError');connected=true;authorized=true;return port;},addEventListener(name,fn){(listeners[name]??=[]).push(fn);}}});
+ },options);
+}
