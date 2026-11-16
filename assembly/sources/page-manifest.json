@@ -1,0 +1,135 @@
+[
+  {
+    "page": 5,
+    "stage": 1,
+    "new_stage": 1,
+    "lift_mm": 0,
+    "title": "Знайди нижню платформу"
+  },
+  {
+    "page": 6,
+    "stage": 2,
+    "new_stage": 2,
+    "lift_mm": 0,
+    "title": "Перший мотор"
+  },
+  {
+    "page": 7,
+    "stage": 3,
+    "new_stage": 3,
+    "lift_mm": 0,
+    "title": "Ще три мотори"
+  },
+  {
+    "page": 8,
+    "stage": 4,
+    "new_stage": 4,
+    "lift_mm": 0,
+    "title": "Чотири колеса"
+  },
+  {
+    "page": 9,
+    "stage": 5,
+    "new_stage": 5,
+    "lift_mm": 0,
+    "title": "Опори для другого поверху"
+  },
+  {
+    "page": 10,
+    "stage": 6,
+    "new_stage": 6,
+    "lift_mm": 0,
+    "title": "Відсік під нижньою платформою"
+  },
+  {
+    "page": 11,
+    "stage": 7,
+    "new_stage": 7,
+    "lift_mm": 0,
+    "title": "Передній кронштейн"
+  },
+  {
+    "page": 12,
+    "stage": 8,
+    "new_stage": 8,
+    "lift_mm": 0,
+    "title": "П’ять очей унизу"
+  },
+  {
+    "page": 13,
+    "stage": 9,
+    "new_stage": 9,
+    "lift_mm": 0,
+    "title": "Верхня платформа"
+  },
+  {
+    "page": 14,
+    "stage": 10,
+    "new_stage": 10,
+    "lift_mm": 0,
+    "title": "Плата розширення ESP32 30P"
+  },
+  {
+    "page": 15,
+    "stage": 11,
+    "new_stage": 11,
+    "lift_mm": 0,
+    "title": "Встав ESP32 DevKit V1"
+  },
+  {
+    "page": 16,
+    "stage": 12,
+    "new_stage": 12,
+    "lift_mm": 0,
+    "title": "Драйвери D1 і D2"
+  },
+  {
+    "page": 17,
+    "stage": 13,
+    "new_stage": 13,
+    "lift_mm": 0,
+    "title": "Живлення та кнопки"
+  },
+  {
+    "page": 18,
+    "stage": 14,
+    "new_stage": 14,
+    "lift_mm": 0,
+    "title": "Підключи чотири мотори"
+  },
+  {
+    "page": 19,
+    "stage": 15,
+    "new_stage": 15,
+    "lift_mm": 0,
+    "title": "Команди для драйверів"
+  },
+  {
+    "page": 20,
+    "stage": 16,
+    "new_stage": 16,
+    "lift_mm": 0,
+    "title": "Підключи датчик"
+  },
+  {
+    "page": 21,
+    "stage": 17,
+    "new_stage": 17,
+    "lift_mm": 0,
+    "title": "З’єднай живлення"
+  },
+  {
+    "page": 23,
+    "stage": 18,
+    "new_stage": 18,
+    "lift_mm": 0,
+    "title": "Встав чотири AA"
+  },
+  {
+    "page": 24,
+    "stage": 18,
+    "new_stage": null,
+    "lift_mm": 0,
+    "title": "Перевір відсік і зазор"
+  }
+]

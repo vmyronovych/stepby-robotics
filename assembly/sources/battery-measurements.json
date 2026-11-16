@@ -1,0 +1,61 @@
+{
+  "status": "USER_MEASURED_UNDERSIDE_TAPE_SELECTED_VALIDATION_PENDING",
+  "units": "mm",
+  "length_mm": 62,
+  "width_mm": 58,
+  "height_with_cells_mm": 18,
+  "source": "User message 2026-10-15: height 18 mm, width 58 mm, length 62 mm, accompanied by 10 photos with cells",
+  "photo_directory": "../references/battery-2026-10-15",
+  "observed_configuration": "4 AA in one layer, side by side; two visible base mounting holes; red and black leads",
+  "cells_in_photos": "Marked ALKALINE LR6 1.5V; classroom NiMH choice unchanged",
+  "mount_hole_diameter_mm": null,
+  "mount_hole_pitch_mm": null,
+  "wall_thickness_mm": null,
+  "fit_limits": [
+    "Owner reports 3–4 mm clearance before planned adhesive mounting; final clearance not verified",
+    "Tape thickness and adhesion to actual acrylic and holder plastic must be checked",
+    "Exact XY, tape footprint and mounting offset remain unknown; no invented geometry",
+    "Cell retention, wire routing and loaded rolling test remain pending"
+  ],
+  "rejected_pose": {
+    "status": "REJECTED_BY_OWNER_DRY_FIT",
+    "centre_xy_mm": [
+      0,
+      0
+    ],
+    "width_along": "x",
+    "length_along": "y",
+    "bottom_on": "upper surface of lower plate",
+    "pad_mm": 0,
+    "reason": "Owner reports holder does not fit between plates; exact obstruction not measured"
+  },
+  "selected_pose": {
+    "status": "UNDERSIDE_FIT_CONFIRMED_TAPE_SELECTED",
+    "location": "under lower chassis plate",
+    "centre_xy_mm": null,
+    "orientation_in_plane": "TBD",
+    "mounting_offset_mm": null,
+    "ground_clearance_mm": [
+      3,
+      4
+    ],
+    "ground_contact_observed": false,
+    "source": "Owner photo and statement 2026-10-15: fits under platform and does not touch or rub ground",
+    "photo": "../references/battery-2026-10-15/11-under-platform-fit.png",
+    "ground_clearance_stage": "Owner report before planned tape mounting",
+    "mounting_method": "double-sided adhesive tape selected by owner",
+    "mounting_holes_align": false,
+    "tape_thickness_mm": null,
+    "tape_product": null
+  },
+  "display_pose": {
+    "centre_xy_mm": [
+      0,
+      0
+    ],
+    "width_along": "x",
+    "length_along": "y",
+    "top_z_mm": 0,
+    "status": "SCHEMATIC_ONLY_EXACT_XY_AND_MOUNTING_OFFSET_UNKNOWN"
+  }
+}

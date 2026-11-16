@@ -1,0 +1,25 @@
+.cache/
+node_modules/
+web/node_modules/
+web/test-results/
+web/dist/
+firmware/build/
+tools/arduino-bin/
+__pycache__/
+.DS_Store
+firmware/blink/build/
+
+firmware/browser/build/
+web/dist-site/
+
+# Local archives, test runs and device logs are not source files.
+exports/
+test-results/
+playwright-report/
+web/playwright-report/
+validation/*
+!validation/bench-checklist.md
+!validation/report.md
+.env
+.env.*
+!.env.example

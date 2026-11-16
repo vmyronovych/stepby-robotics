@@ -1,0 +1,26 @@
+{
+  "name": "stepby-robotics",
+  "version": "0.3.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "python3 ../tools/export_assembly.py && vite build && node scripts/package-site.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "test:e2e": "playwright test",
+    "model": "python3 ../tools/export_assembly.py",
+    "build:site": "python3 ../tools/export_assembly.py && vite build --mode site && node scripts/package-site.mjs",
+    "test:browser-usb": "node --test tests/browser-usb.test.mjs"
+  },
+  "dependencies": {
+    "@noble/hashes": "2.4.0",
+    "blockly": "13.3.0",
+    "esptool-js": "0.7.1",
+    "libavoid-js": "0.4.5",
+    "three": "0.186.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.58.2",
+    "vite": "8.3.4"
+  }
+}

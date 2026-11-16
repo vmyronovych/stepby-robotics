@@ -1,0 +1,25 @@
+.my-block-dialog{position:fixed;inset:0;margin:0;width:100vw;max-width:none;height:100dvh;max-height:none;box-sizing:border-box;border:0;border-radius:0;padding:24px;background:#faf8f5;color:#283442;overflow:hidden}
+.my-block-dialog[open]{display:flex;flex-direction:column;gap:12px}
+.my-block-header,.my-block-tools,.my-block-dialog footer{display:flex;align-items:center;gap:16px;flex-shrink:0}
+.my-block-header{justify-content:space-between}.my-block-header h2{margin:0;font-size:26px}.my-block-eyebrow{font-size:12px;font-weight:800;letter-spacing:2px;color:#a14874;margin:0 0 4px}
+.my-block-dialog button{border:1px solid #d7dcd5;background:white;border-radius:12px;padding:12px 18px;cursor:pointer;font:inherit;color:inherit}
+.my-block-tools label{display:flex;align-items:center;gap:12px;flex:1;min-width:0}.my-block-tools input{font:inherit;font-weight:700;border:2px solid #d7b8c8;border-radius:12px;padding:12px;min-width:0;width:min(480px,100%);background:white;color:inherit}
+.my-block-tip{margin:0;color:#62736d;font-size:14px}.my-block-error{margin:0;color:#a13e39;font-size:14px;min-height:1.3em;flex-shrink:0}
+#myBlockCanvas{flex:1;min-height:170px;border:1px solid #e0e4dc;border-radius:16px;overflow:hidden;position:relative}
+.my-block-spacer{flex:1}.my-block-dialog .my-block-primary{background:#ae4979;border-color:#ae4979;color:white;font-weight:700}.my-block-dialog [data-delete]{font-size:14px;color:#895162}
+.my-block-dialog [hidden]{display:none!important}.my-block-dialog button:focus-visible,.my-block-dialog input:focus-visible{outline:3px solid #557fba;outline-offset:3px}.my-block-entry{color:#a14874!important;white-space:nowrap}
+@media(max-width:760px){.file-actions{flex-wrap:wrap}}
+@media(max-width:700px){.my-block-dialog{padding:12px;gap:8px}.my-block-header h2{font-size:20px}.my-block-tools{flex-wrap:wrap;gap:8px}.my-block-tools label{flex-basis:100%;font-size:14px}.my-block-tools input{padding:9px}.my-block-dialog button{padding:10px;font-size:14px}.my-block-tip{font-size:12px}.my-block-dialog footer{gap:8px;flex-wrap:wrap}.my-block-dialog [data-delete]{font-size:12px}.my-block-dialog .my-block-spacer{display:none}}
+
+.my-block-parameters{flex-shrink:0;font-size:14px;border:1px solid #e2d6dd;border-radius:12px;padding:8px 12px;max-height:190px;overflow:auto}
+.my-block-parameters summary{cursor:pointer;font-weight:700;color:#914467}
+.my-block-parameters p{margin:8px 0 0;color:#62736d;font-size:12px}
+.my-block-parameter-list{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.my-block-parameter-row{display:flex;align-items:center;gap:5px;min-width:0}
+.my-block-parameter-row input,.my-block-parameter-row select{font:inherit;color:inherit;border:1px solid #d7b8c8;border-radius:8px;background:white;padding:7px;min-width:0;width:120px}
+.my-block-parameter-row select,.my-block-parameter-row input[type=number]{width:92px}
+.my-block-dialog .my-block-parameter-row button{padding:5px 9px}
+.my-block-dialog [data-add-parameter]{padding:6px 10px;font-size:13px}
+@media(max-width:700px){.my-block-parameters{max-height:170px}.my-block-parameter-row{width:100%}.my-block-parameter-row input{width:90px;flex:1}.my-block-parameter-row select,.my-block-parameter-row input[type=number]{width:75px;flex:1}}
+/* Long GPIO menus must fit the smaller canvas below the parameter editor. */
+#myBlockCanvas .blocklyDropDownContent{max-height:min(220px,22vh);overflow:auto}

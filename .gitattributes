@@ -1,0 +1,13 @@
+*.pdf binary
+*.bin binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gz binary
+*.wasm binary
+
+# CSV exports use CRLF; preserve their existing line endings.
+*.csv whitespace=cr-at-eol
+
+# Preserve the original formatting of third-party license files.
+web/public/third-party/** whitespace=-blank-at-eof

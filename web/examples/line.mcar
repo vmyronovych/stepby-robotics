@@ -1,0 +1,67 @@
+{
+  "format": "mandrivnyk",
+  "version": 2,
+  "name": "Чорна дорога",
+  "workspace": {
+    "blocks": {
+      "languageVersion": 0,
+      "blocks": [
+        {
+          "type": "robot_start",
+          "next": {
+            "block": {
+              "type": "robot_speed",
+              "inputs": {
+                "SPEED": {
+                  "shadow": {
+                    "type": "math_number",
+                    "fields": {
+                      "NUM": 70
+                    }
+                  }
+                }
+              },
+              "next": {
+                "block": {
+                  "type": "robot_kp",
+                  "inputs": {
+                    "KP": {
+                      "shadow": {
+                        "type": "math_number",
+                        "fields": {
+                          "NUM": 25
+                        }
+                      }
+                    }
+                  },
+                  "next": {
+                    "block": {
+                      "type": "robot_line",
+                      "inputs": {
+                        "TIME": {
+                          "shadow": {
+                            "type": "math_number",
+                            "fields": {
+                              "NUM": 8
+                            }
+                          }
+                        }
+                      },
+                      "next": {
+                        "block": {
+                          "type": "robot_stop"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "x": 65,
+          "y": 45
+        }
+      ]
+    }
+  }
+}

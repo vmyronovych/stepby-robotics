@@ -1,0 +1,12 @@
+.block-selection-tools{display:flex;align-items:center;gap:5px;padding:6px 12px;background:#fafbf9;border-bottom:1px solid #e2e7e0;flex-shrink:0;overflow-x:auto;min-width:0}
+.block-selection-tools button,.my-block-dialog .block-selection-tools button{display:inline-flex;align-items:center;justify-content:center;gap:6px;flex-shrink:0;width:34px;height:34px;padding:7px;border:1px solid transparent;border-radius:8px;background:transparent;color:#49615d;font:inherit;font-size:12px}
+.block-selection-tools button:first-child{width:auto}.block-selection-tools button:hover:not(:disabled){background:#e7eeea}.block-selection-tools button[aria-pressed=true]{background:#d7e9e4;border-color:#4a8881;color:#245e56}.block-selection-tools svg{width:20px;height:20px;flex-shrink:0}.block-selection-tools button:disabled{opacity:.35}
+.block-selection-status{font-size:12px;color:#61776e;white-space:nowrap;margin-left:5px}.mcar-block-selected>.blocklyPath{stroke:#2479cc!important;stroke-width:3px!important;stroke-opacity:1!important}.block-selection-marquee{position:fixed;z-index:10000;border:1.5px solid #2479cc;background:#2479cc20;pointer-events:none}.mcar-selection-mode{cursor:crosshair}
+@media(max-width:700px){.block-selection-tools{padding:4px;gap:2px}.block-selection-tools button:first-child span{display:none}.block-selection-status{font-size:10px}}
+
+.mcar-block-selected>.blocklyPathSelected{display:none}
+/* Quiet until needed: keep the canvas height, reveal actions with a selection. */
+#blocklyArea,#myBlockCanvas{position:relative}
+.block-selection-tools{position:absolute;top:8px;right:14px;z-index:20;max-width:calc(100% - 290px);padding:3px;gap:2px;border:1px solid #e2e7e0;border-radius:9px;background:#fffffff2;box-shadow:0 2px 8px #263c3210;overflow-x:auto}
+.block-selection-tools:not(.has-selection){opacity:.65}.block-selection-tools:hover,.block-selection-tools:focus-within{opacity:1}.block-selection-tools [hidden]{display:none!important}.block-selection-status:empty{display:none}.block-selection-tools:not(.has-selection) button:first-child span{display:none}
+@media(max-width:700px){.block-selection-tools{right:7px;top:6px;max-width:calc(100% - 190px)}.block-selection-tools.has-selection{max-width:calc(100% - 14px)}}

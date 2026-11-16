@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1780" viewBox="0 0 1600 1780"><title>Мандрівник: живлення, сигнали та роз’єми</title><rect width="1600" height="1780" fill="white"/><style>text{font-family:Arial,DejaVu Sans,sans-serif;fill:#142d49}.title{font-size:30px;font-weight:bold}.head{font-size:23px;font-weight:bold}.body{font-size:19px}.small{font-size:16px}.wire{fill:none;stroke:#c44747;stroke-width:4}.gnd{fill:none;stroke:#283e53;stroke-width:3}</style>
+<text x="40" y="48" class="title">Мандрівник • Електрична схема для вчителя</text>
+<text x="40" y="80" class="body">ESP-WROOM-32 / DevKit V1 30-pin + плата розширення 30P. Номери GPIO не є номерами ніжок.</text>
+<rect x="40" y="112" width="225" height="105" rx="9" fill="#eef4f9" stroke="#92a7b9"/>
+<text x="55" y="141" class="head">BT1 • 4×NiMH AA</text>
+<text x="55" y="170" class="body">4,8 В номінально</text>
+<text x="55" y="195" class="body">Тримач уже в наборі</text>
+<rect x="310" y="112" width="175" height="105" rx="9" fill="#eef4f9" stroke="#92a7b9"/>
+<text x="325" y="141" class="head">F1 • T3,15A</text>
+<text x="325" y="170" class="body">Біля плюса BT1</text>
+<text x="325" y="195" class="body">Закритий тримач</text>
+<rect x="530" y="112" width="220" height="105" rx="9" fill="#eef4f9" stroke="#92a7b9"/>
+<text x="545" y="141" class="head">S1 • SPST</text>
+<text x="545" y="170" class="body">≥5 А DC / ≥12 В</text>
+<text x="545" y="195" class="body">Вимикає весь робот</text>
+<rect x="795" y="112" width="285" height="105" rx="9" fill="#eef4f9" stroke="#92a7b9"/>
+<text x="810" y="141" class="head">D0 • SS54</text>
+<text x="810" y="170" class="body">Анод ← S1</text>
+<text x="810" y="195" class="body">Катод (смуга) → VBAT_SW</text>
+<polyline points="265,158 310,158" class="wire"/>
+<polyline points="485,158 530,158" class="wire"/>
+<polyline points="750,158 795,158" class="wire"/>
+<polyline points="1080,158 1500,158 1500,253 270,253" class="wire"/>
+<text x="1140" y="145" class="head">VBAT_SW після D0</text>
+<polyline points="270,253 270,290" class="wire"/>
+<circle cx="270" cy="253" r="5" fill="#c44747"/>
+<polyline points="740,253 740,290" class="wire"/>
+<circle cx="740" cy="253" r="5" fill="#c44747"/>
+<polyline points="1240,253 1240,290" class="wire"/>
+<circle cx="1240" cy="253" r="5" fill="#c44747"/>
+<rect x="40" y="290" width="460" height="185" rx="9" fill="#eef4f9" stroke="#92a7b9"/>
+<text x="55" y="319" class="head">D1 • Pololu DRV8833 #2130</text>
+<text x="55" y="348" class="body">VIN ← VBAT_SW; GND → зірка</text>
+<text x="55" y="373" class="body">AOUT1 / AOUT2 → JM1.1 / JM1.2 → LF</text>
+<text x="55" y="398" class="body">BOUT1 / BOUT2 → JM2.1 / JM2.2 → RF</text>
+<text x="55" y="423" class="body">VMM → C5 470 мкФ + C5a 100 нФ → GND</text>
+<text x="55" y="448" class="body">nSLEEP: штатний стан, НЕ до ESP32</text>
+<rect x="520" y="290" width="460" height="185" rx="9" fill="#eef4f9" stroke="#92a7b9"/>
+<text x="535" y="319" class="head">D2 • Pololu DRV8833 #2130</text>
+<text x="535" y="348" class="body">VIN ← VBAT_SW; GND → зірка</text>
+<text x="535" y="373" class="body">AOUT1 / AOUT2 → JM3.1 / JM3.2 → LR</text>
+<text x="535" y="398" class="body">BOUT1 / BOUT2 → JM4.1 / JM4.2 → RR</text>
+<text x="535" y="423" class="body">VMM → C6 470 мкФ + C6a 100 нФ → GND</text>
+<text x="535" y="448" class="body">nSLEEP: штатний стан, НЕ до ESP32</text>
+<rect x="1000" y="290" width="550" height="185" rx="9" fill="#eef4f9" stroke="#92a7b9"/>
+<text x="1015" y="319" class="head">F2 T1A → U2 S13V30F5 #4082</text>
+<text x="1015" y="348" class="body">VIN після F2; GND → зірка; EN відкритий</text>
+<text x="1015" y="373" class="body">C7 100 мкФ / 16 В: VIN (+) → GND (−)</text>
+<text x="1015" y="398" class="body">5 В → J5.1 → Micro-USB 30P → VIN</text>
+<text x="1015" y="423" class="body">GND → J5.2 → Micro-USB GND → ESP32</text>
+<text x="1015" y="448" class="body">C8 470 мкФ + C8a 100 нФ: 5V → GND</text>
+<polyline points="270,475 270,540" class="gnd"/>
+<polyline points="740,475 740,540" class="gnd"/>
+<polyline points="1240,475 1240,540" class="gnd"/>
+<polyline points="150,217 150,235 20,235 20,540 1520,540" class="gnd"/>
+<text x="45" y="565" class="head">BT1− → спільна GND зірка; окремі силові повернення від D1, D2 та U2</text>
+<text x="45" y="597" class="body">C1–C4: 100 нФ безпосередньо між двома клемами кожного мотору. Моторні клеми НЕ з’єднувати з GND.</text>
+<text x="45" y="627" class="body">C5/C6: 16 В; C8: 10 В. Плюси електролітів до відповідного плюса. VMM двох драйверів НЕ об’єднувати.</text>
+<rect x="40" y="662" width="470" height="303" rx="9" fill="#eef4f9" stroke="#92a7b9"/>
+<text x="55" y="691" class="head">JD1 • сигнали передніх моторів</text>
+<text x="55" y="720" class="body">1  GND</text>
+<text x="55" y="745" class="body">2  GPIO16 (D16/RX2) → D1 AIN1</text>
+<text x="55" y="770" class="body">3  GPIO17 (D17/TX2) → D1 AIN2</text>
+<text x="55" y="795" class="body">4  GPIO18 (D18) → D1 BIN1</text>
+<text x="55" y="820" class="body">5  GPIO19 (D19) → D1 BIN2</text>
+<text x="55" y="845" class="body">6  D1 nFAULT → GPIO21 (D21)</text>
+<text x="55" y="870" class="body">Кожний AIN/BIN: 10 кΩ до GND</text>
+<text x="55" y="895" class="body">nFAULT: окремі 10 кΩ до 3V3</text>
+<text x="55" y="920" class="body">AISEN, BISEN: по 0,25 Ω → GND</text>
+<rect x="530" y="662" width="470" height="303" rx="9" fill="#eef4f9" stroke="#92a7b9"/>
+<text x="545" y="691" class="head">JD2 • сигнали задніх моторів</text>
+<text x="545" y="720" class="body">1  GND</text>
+<text x="545" y="745" class="body">2  GPIO23 (D23) → D2 AIN1</text>
+<text x="545" y="770" class="body">3  GPIO25 (D25) → D2 AIN2</text>
+<text x="545" y="795" class="body">4  GPIO26 (D26) → D2 BIN1</text>
+<text x="545" y="820" class="body">5  GPIO27 (D27) → D2 BIN2</text>
+<text x="545" y="845" class="body">6  D2 nFAULT → GPIO22 (D22)</text>
+<text x="545" y="870" class="body">Кожний AIN/BIN: 10 кΩ до GND</text>
+<text x="545" y="895" class="body">nFAULT: окремі 10 кΩ до 3V3</text>
+<text x="545" y="920" class="body">AISEN, BISEN: по 0,25 Ω → GND</text>
+<rect x="1020" y="662" width="530" height="303" rx="9" fill="#eef4f9" stroke="#92a7b9"/>
+<text x="1035" y="691" class="head">JS • QTR-MD-05A #4245</text>
+<text x="1035" y="720" class="body">1  ESP32 3V3 (3V3) → QTR VCC</text>
+<text x="1035" y="745" class="body">2  ESP32 GND → QTR GND</text>
+<text x="1035" y="770" class="body">3  Крайній лівий OUT1 → GPIO32 (D32)</text>
+<text x="1035" y="795" class="body">4  OUT2 → GPIO33 (D33)</text>
+<text x="1035" y="820" class="body">5  Середній OUT3 → GPIO34 (D34)</text>
+<text x="1035" y="845" class="body">6  OUT4 → GPIO35 (D35)</text>
+<text x="1035" y="870" class="body">7  Крайній правий OUT5 → GPIO36 (VP)</text>
+<text x="1035" y="895" class="body">CTRL відкритий; штатний pull-up</text>
+<text x="1035" y="920" class="body">C10 10 мкФ + C10a 100 нФ: VCC → GND</text>
+<text x="45" y="1002" class="body">Чотири шунти 0,25 Ω ±1%, ≥0,5 Вт: вирізати штатні обхідні перемички AISEN/BISEN за інструкцією Pololu.</text>
+<text x="45" y="1030" class="body">Номінальний ліміт 0,8 А/мотор; розрахунковий допуск 0,69–0,91 А. Перевірити реально перед класом.</text>
+<rect x="40" y="1062" width="720" height="260" rx="9" fill="#eef4f9" stroke="#92a7b9"/>
+<text x="55" y="1091" class="head">Батарейний ADC • GPIO39 / VN</text>
+<polyline points="75,1142 255,1142" class="wire"/>
+<rect x="255" y="1115" width="150" height="60" rx="9" fill="#eef4f9" stroke="#92a7b9"/>
+<text x="270" y="1144" class="head">R9 100 кΩ</text>
+<polyline points="405,1142 500,1142" class="wire"/>
+<text x="75" y="1121" class="body">VBAT_SW</text>
+<circle cx="490" cy="1142" r="5" fill="#c44747"/>
+<text x="518" y="1125" class="body">GPIO39</text>
+<polyline points="490,1142 490,1200" class="gnd"/>
+<rect x="408" y="1200" width="165" height="60" rx="9" fill="#eef4f9" stroke="#92a7b9"/>
+<text x="423" y="1229" class="head">R10 100 кΩ</text>
+<polyline points="490,1260 490,1290" class="gnd"/>
+<text x="590" y="1288" class="body">GND</text>
+<polyline points="490,1142 650,1142 650,1200" class="gnd"/>
+<text x="591" y="1224" class="body">C9 100 нФ</text>
+<polyline points="650,1235 650,1290 490,1290" class="gnd"/>
+<text x="65" y="1298" class="small">Поріг 4,2 В після D0; калібрувати мультиметром.</text>
+<rect x="780" y="1062" width="770" height="118" rx="9" fill="#eef4f9" stroke="#92a7b9"/>
+<text x="795" y="1091" class="head">JB • кнопка лінія / програма / стоп</text>
+<text x="795" y="1120" class="body">JB.1 → GPIO13 (D13); JB.2 → GND</text>
+<text x="795" y="1145" class="body">Нормально розімкнена; INPUT_PULLUP; програмний debounce 40 мс</text>
+<rect x="780" y="1200" width="770" height="122" rx="9" fill="#eef4f9" stroke="#92a7b9"/>
+<text x="795" y="1229" class="head">JP • розподільник живлення</text>
+<text x="795" y="1258" class="body">XT30 «+» → VBAT_SW; «−» → GND</text>
+<text x="795" y="1283" class="body">Не плутати JP з сервісним J5 (регульовані 5 В).</text>
+<text x="795" y="1308" class="body">Роз’єми промарковані з обох боків; pin 1 позначає вчитель.</text>
+<rect x="40" y="1350" width="1510" height="166" rx="9" fill="#eef4f9" stroke="#92a7b9"/>
+<text x="55" y="1379" class="head">Правила підключення</text>
+<text x="55" y="1408" class="body">Усі 17 GPIO унікальні. Аналогові входи тільки ADC1. Жоден GPIO не отримує 5 В або моторну напругу.</text>
+<text x="55" y="1433" class="body">Перед USB: S1 вимкнути, AA зняти, J5 фізично роз’єднати. USB та зовнішні 5 В не живлять плату одночасно.</text>
+<text x="55" y="1458" class="body">JD1/JD2 = XH-6; JS = XH-7; JM1…JM4, J5, JB = XH-2. XH на 30P немає: сигнальні кінці → S/G/3V3.</text>
+<text x="55" y="1483" class="body">30P: перемичка 3.3V; S = GPIO, V = живлення, G = земля. DC та USB-C вільні. USB для запису — на ESP32.</text>
+<rect x="40" y="1540" width="1510" height="172" rx="9" fill="#eef4f9" stroke="#92a7b9"/>
+<text x="55" y="1569" class="head">До першого запуску</text>
+<text x="55" y="1598" class="body">Виміряти струми всіх моторів. Перевірити контакти 4×AA при 2 А, тепловий режим та старт під обмеженням струму.</text>
+<text x="55" y="1623" class="body">Перевірити Micro-USB 30P → VIN, полярність, шину V=3,3 В, просідання при Wi-Fi. Схема 30P ще не випробувана.</text>
+<text x="55" y="1648" class="body">Уся проводка, пайка, зміна шунтів і захист контактів готуються дорослим. Діти з’єднують готові підписані джгути.</text>
+<text x="55" y="1673" class="body">Повна таблиця мереж: docs/wiring.md. Таблиця ніжок: docs/gpio-map.md. Приймання: validation/bench-checklist.md.</text>
+<text x="40" y="1750" class="small">Версія 12.10.2026 • Сигнальні мережі позначені назвами, без перехрещення ліній. Масштаб довільний.</text>
+</svg>

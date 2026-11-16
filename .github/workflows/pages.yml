@@ -1,0 +1,52 @@
+name: Classroom website
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      deploy_pages:
+        description: Publish the tested classroom website to GitHub Pages
+        type: boolean
+        default: false
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: npm ci --prefix web
+      - run: npm test --prefix web
+      - run: npm run build:site --prefix web
+      - run: npx playwright install --with-deps chromium
+        working-directory: web
+      - run: npm run test:e2e -- --config playwright.browser-usb.config.js
+        working-directory: web
+      - run: npm run test:e2e -- --config playwright.pins.config.js
+        working-directory: web
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: web/dist
+  deploy:
+    if: github.event_name == 'workflow_dispatch' && inputs.deploy_pages
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@v5
+      - uses: actions/deploy-pages@v4
+        id: deployment

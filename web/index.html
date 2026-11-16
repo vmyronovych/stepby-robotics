@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="uk"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>USB-майстерня · Мандрівник</title></head><body>
+<section id="connectionScreen" class="connection-screen" data-step="scanning" aria-labelledby="connectionTitle">
+<header class="connection-brand"><span class="brand-icon" aria-hidden="true">м<span>•</span></span><span>мандрівник<small>ТВОЯ ПЕРША ПРОГРАМА ПОЧИНАЄТЬСЯ ТУТ</small></span></header>
+<div class="connection-layout">
+<div class="connection-visual" aria-hidden="true">
+<svg viewBox="0 0 600 420" class="cable-scene">
+<defs><linearGradient id="shieldMetal" x2="1" y2="1"><stop stop-color="#e4eae5"/><stop offset="1" stop-color="#9caea5"/></linearGradient><pattern id="pinGold" width="15" height="14" patternUnits="userSpaceOnUse"><rect x="4" width="6" height="9" rx="1" fill="#c6b16f"/></pattern></defs>
+<ellipse cx="300" cy="220" rx="255" ry="165" fill="#e9eee2"/>
+<circle class="connection-halo" cx="405" cy="220" r="148" fill="none" stroke="#b6d4c0" stroke-width="2" stroke-dasharray="4 12"/>
+<g class="scene-board">
+<rect x="290" y="122" width="242" height="14" fill="url(#pinGold)"/><rect x="290" y="296" width="242" height="14" fill="url(#pinGold)"/>
+<rect x="284" y="136" width="256" height="160" rx="12" fill="#87998a"/>
+<rect x="280" y="130" width="256" height="160" rx="12" fill="#253b36"/>
+<g fill="none" stroke="#b5be91" stroke-width="4"><path d="M492 158v100m-12-100v80m24-80v80m12-80v80M480 158h36"/></g>
+<rect x="366" y="149" width="100" height="123" rx="4" fill="url(#shieldMetal)" stroke="#84998d" stroke-width="2"/>
+<text x="416" y="206" text-anchor="middle" font-family="monospace" font-weight="bold" font-size="22" fill="#52695e">ESP-32</text><text x="416" y="227" text-anchor="middle" font-size="9" fill="#52695e">Wi-Fi + Bluetooth</text>
+<rect x="326" y="192" width="24" height="30" rx="2" fill="#14231f" stroke="#a2b1a4" stroke-dasharray="3 3" stroke-width="3"/>
+<rect class="scene-boot" x="300" y="153" width="22" height="16" rx="3" fill="#c0c9c1"/><circle cx="311" cy="161" r="5" fill="#33423b"/><text x="328" y="166" font-size="10" fill="#e3eadf">BOOT</text>
+<rect x="300" y="252" width="22" height="16" rx="3" fill="#c0c9c1"/><circle cx="311" cy="260" r="5" fill="#33423b"/><text x="329" y="265" font-size="10" fill="#e3eadf">EN</text>
+<rect x="274" y="191" width="31" height="39" rx="4" fill="#a3b3ac"/><rect x="273" y="198" width="11" height="25" rx="2" fill="#172b27"/>
+<circle class="scene-led" cx="347" cy="244" r="5" fill="#6b8072"/>
+<g fill="#e9eee2" stroke="#879989" stroke-width="2"><circle cx="292" cy="142" r="5"/><circle cx="524" cy="142" r="5"/><circle cx="292" cy="278" r="5"/><circle cx="524" cy="278" r="5"/></g>
+</g>
+<path class="plug-path" d="M200 210h65" fill="none" stroke="#b4bda6" stroke-width="2" stroke-dasharray="5 7"/>
+<g class="scene-cable"><path d="M-70 340C130 350 10 210 140 210" fill="none" stroke="#3b514a" stroke-width="15"/><path d="M-70 336C130 346 10 206 140 206" fill="none" stroke="#61746b" stroke-width="3"/>
+<rect x="131" y="191" width="50" height="39" rx="9" fill="#354d44"/><path d="M176 199h25l6 5v13l-6 5h-25z" fill="#bfcac3" stroke="#83988d" stroke-width="2"/><path d="M191 205h12m-12 10h12" stroke="#5a7064" stroke-width="2"/>
+</g>
+<g class="boot-pointer"><circle cx="311" cy="161" r="23" fill="none" stroke="#e7b340" stroke-width="4"/><path d="M311 110v20m-7-8 7 8 7-8" fill="none" stroke="#b38325" stroke-width="3"/></g>
+<text x="212" y="365" text-anchor="middle" fill="#697e70" font-size="15">micro-USB</text>
+</svg>
+<span class="connection-visual-note" id="connectionVisualNote">Кабель має передавати дані, а не лише заряджати</span>
+</div>
+<div class="connection-copy"><span id="connectionStep" class="eyebrow">ПІДКЛЮЧЕННЯ</span><h1 id="connectionTitle" tabindex="-1">Знайомимося з твоєю платою</h1><p id="connectionDescription" role="status" aria-live="polite">Перевіряємо USB…</p>
+<button id="connectionAction" class="button upload" hidden>Кабель підключено — обрати ESP32</button>
+<p id="connectionHint" class="connection-hint"></p>
+<div id="connectionRecovery" hidden><ol><li>Відпусти BOOT. Не запускай встановлення повторно.</li><li>Від’єднай USB на кілька секунд і під’єднай знову. Якщо є хаб — спробуй пряме підключення.</li><li>Закрий інші вкладки з платою та монітори USB. Натисни «Перевірити підключення».</li></ol><button id="connectionReselect" class="small-button">Обрати USB-порт заново</button><details><summary>Перше налаштування або свідоме перевстановлення</summary><p>Відсутність відповіді не доводить, що прошивку втрачено. Встановлення замінить програму на платі тестом блимання. Блоки в редакторі залишаться.</p><button id="connectionInstall" class="small-button">Перейти до встановлення базової прошивки</button></details></div>
+<details id="connectionDiagnostics" hidden><summary>Діагностика USB — причина й остання відповідь</summary><pre id="connectionDiagnosticText"></pre></details>
+<div id="connectionJob" hidden></div>
+<button id="connectionSkip" class="connection-skip" hidden>Продовжити без плати</button>
+<p id="connectionSkipHint" class="connection-skip-hint" hidden>Створюй блоки та схеми. ESP32 можна підключити пізніше.</p>
+<details id="connectionHelp" class="connection-help"><summary>Плату не видно?</summary><p>Перевір кабель: він має передавати дані. Спробуй інший USB-порт. Закрий Arduino IDE та інші вкладки, що працюють із платою.</p><p>На Windows може знадобитися <a href="https://www.silabs.com/software-and-tools/usb-to-uart-bridge-vcp-drivers" target="_blank" rel="noopener">драйвер CP210x</a>. У класі поклич учителя.</p></details>
+</div></div><footer class="connection-footer">Блоки зберігаються на цьому комп’ютері · ESP32 / ESP-WROOM-32</footer>
+</section>
+<div id="app" class="usb-app" hidden inert>
+<header class="topbar"><a class="brand" href="./" aria-label="Мандрівник — головна"><span class="brand-icon">м<span>•</span></span><span>мандрівник<small>USB-МАЙСТЕРНЯ</small></span></a><div class="project-name"><span class="project-dot"></span><input id="projectName" value="Моє блимання" aria-label="Назва проєкту" maxlength="60"><span id="savedLabel">збережено тут</span></div><a id="assemblyButton" href="#assembly" class="quiet">Роздивитися машинку ↗</a></header>
+<nav class="commandbar" aria-label="Дії з програмою"><div class="file-actions"><button id="saveProject" class="icon-button">↓ <span>Зберегти</span></button><button id="openProject" class="icon-button">↥ <span>Відкрити</span></button><label class="example-label">Ідеї <select id="exampleSelect"><option value="">Обери приклад</option><option value="blink">Моє блимання</option><option value="pulses">Три спалахи</option><option value="console">Телефон → консоль</option><option value="toggle">Телефон → перемикач GPIO19</option><option value="remote">Світлодіод із телефона</option><option value="empty">Чистий аркуш</option></select></label></div><span class="usb-route">Блоки <span>→</span> USB <span>→</span> твоя ESP32</span></nav>
+<main><section class="editor-panel" aria-label="Редактор блоків"><div class="editor-heading"><div><span class="eyebrow">ТВОЯ ПРОГРАМА</span><h1>З’єднай блоки. Оживи свою плату.</h1></div><button id="fitProgram" class="fit-program" title="Вмістити всі блоки у вікні">⤢ <span>Уся програма</span></button></div><div id="blocklyArea"><div id="blocklyDiv"></div></div><details id="usbConsole" class="usb-console" open><summary>Консоль ESP32</summary><div class="usb-console-tools"><span data-console-status role="status">USB не підключено · підключи ESP32</span><button type="button" data-console-clear>Очистити</button></div><div data-console-output class="usb-console-output" role="log" aria-label="Повідомлення ESP32" aria-live="polite" tabindex="0"></div></details><div class="editor-footer"><span id="blockCount"></span><span><i class="local-dot"></i> На цьому комп’ютері</span><button id="codeButton">Показати Arduino-код ↗</button></div></section>
+<aside class="usb-panel" aria-label="Прошивання ESP32">
+<details id="remoteConnection" hidden><summary>Пульт із телефона · Wi-Fi</summary><p>Завантаж приклад «Світлодіод із телефона». На телефоні підключись до мережі <strong id="remoteNetwork"></strong>, пароль <strong id="remotePassword"></strong>. Залишайся підключеним, навіть якщо немає інтернету.</p><p>Відкрий <strong>http://192.168.4.1</strong> у браузері телефона. Після зміни програми перезавантаж сторінку пульта. Не публікуй пароль.</p></details>
+<div class="usb-panel-title"><h2>Твоя плата</h2><span id="usbBadge" class="badge offline">Перевіряємо USB</span></div>
+<button id="openPinEditor" class="usb-device" aria-label="Відкрити розпіновку ESP32" aria-haspopup="dialog">
+<div class="usb-board-art" aria-hidden="true"><div class="usb-board-pins"></div><div class="usb-board"><div class="usb-antenna"></div><div class="usb-shield">ESP-32<small>Wi-Fi + Bluetooth</small></div><span class="usb-led-dot"></span><span class="usb-board-chip"></span><span class="usb-socket"></span></div></div>
+<div class="usb-device-copy"><strong>ESP32</strong><span>Досліджуй та програмуй піни</span><small id="boardPinSelection">Відкрити розпіновку ↗</small></div>
+</button>
+<details class="usb-connection"><summary>Налаштування підключення</summary><label class="usb-port-label" for="usbPort">USB-порт</label><div class="usb-port-row"><select id="usbPort" disabled><option value="">Шукаємо плату…</option></select><button id="refreshUsb" class="small-button" aria-label="Оновити список USB-плат">↻</button></div><button id="reinstallRuntime" class="runtime-reinstall" disabled>Встановити базову прошивку заново</button></details>
+<div id="flashCard" class="flash-card" data-state="idle">
+<div class="flash-card-heading"><span id="statusIcon" class="status-icon" aria-hidden="true">↗</span><div><span class="eyebrow" id="statusEyebrow">ВІД БЛОКІВ ДО ПЛАТИ</span><h3 id="statusTitle">Готові спробувати?</h3></div><span id="elapsed" class="usb-elapsed" hidden></span></div>
+<p id="usbStatus" class="usb-status" role="status" aria-live="polite">Підключи ESP32 кабелем USB до цього комп’ютера.</p>
+<div id="setupGuide" class="setup-guide" hidden>
+<ol>
+<li><strong>Затисни BOOT на платі</strong><span>Знайди маленьку кнопку з написом <b>BOOT</b> біля USB та тримай її натиснутою.</span></li>
+<li><strong>Натисни кнопку нижче</strong><span>«BOOT затиснуто — встановити». Продовжуй тримати BOOT.</span></li>
+<li><strong>Відпусти, коли почнеться запис</strong><span>Ми покажемо «Можна відпустити BOOT». USB залиш підключеним.</span></li>
+</ol>
+<p id="setupRetryHelp" class="setup-retry" hidden>Якщо знову не під’єднається: тримай BOOT, коротко натисни й відпусти EN, а потім повтори встановлення. Якщо складно — поклич учителя.</p>
+<button id="probeAgain" class="setup-probe">Вже налаштовував цю плату — перевірити ще раз</button>
+</div>
+<p id="bootHold" class="boot-cue" role="status" hidden><b>Тримай BOOT натиснутою</b><span>Готуємо запис. Підкажемо, коли відпустити.</span></p>
+<p id="bootRelease" class="boot-cue release" role="status" hidden><b>Можна відпустити BOOT</b><span>Залиш USB підключеним до завершення.</span></p>
+<div id="activityTrack" class="activity-track" role="progressbar" aria-label="Прошивання програми" hidden><span></span></div>
+<p id="activityHint" class="activity-hint" hidden></p>
+<ol class="usb-progress" aria-label="Етапи прошивання"><li data-phase="compiling"><span>1</span> Підготовка</li><li data-phase="uploading"><span>2</span> Запис</li><li data-phase="verifying"><span>3</span> Запуск</li></ol>
+<button id="flashProgram" class="button upload usb-flash" disabled><span id="flashIcon" aria-hidden="true">↗</span><span id="flashLabel">Прошити програму</span></button>
+<p id="flashNote" class="usb-flash-note">Замінить програму на платі й одразу її запустить.</p>
+</div>
+<p id="changedNote" class="usb-changed" hidden>Є нові зміни в блоках. Проший ще раз, щоб записати їх на плату.</p>
+<details class="usb-troubleshoot"><summary>Плату не видно?</summary><p>Перевір кабель: він має передавати дані. Закрий інші програми, які використовують USB-порт.</p><p>На Windows учитель може встановити <a href="https://www.silabs.com/software-and-tools/usb-to-uart-bridge-vcp-drivers" target="_blank" rel="noopener">драйвер CP210x</a> для цієї плати. Якщо браузер забороняє USB, звернися до адміністратора класу.</p></details>
+<details class="usb-log"><summary>Деталі прошивання</summary><pre id="usbLog"></pre></details>
+<div class="usb-help"><span aria-hidden="true">✦</span><p>Блок «світлодіод GPIO2» керує виходом GPIO2.<small>Вбудований LED є на цьому піні не в усіх платах. Короткі спалахи індикатора USB не показують стан GPIO2.</small><small>Кнопка RST або EN запускає програму спочатку.</small></p></div>
+</aside></main><footer class="statusbar"><span id="notice" role="status">Chrome / Edge · USB · без встановлення програм</span><span class="version">ESP32 · 38 КОНТАКТІВ</span></footer>
+</div><input id="projectFile" type="file" accept=".mcar,.json" hidden>
+<dialog id="codeDialog"><button id="closeCode" class="dialog-close" aria-label="Закрити">×</button><h2>Код із твоїх блоків</h2><p>Саме цей Arduino-скетч компілюється перед записом.</p><pre id="codePreview"></pre></dialog>
+<script type="module" src="/src/usb-main.js"></script></body></html>

@@ -1,0 +1,32 @@
+{
+  "version": "0.3.0",
+  "chip": "classic ESP32 / ESP-WROOM-32 / DevKit V1 30-pin",
+  "flashBytes": 4194304,
+  "arduinoCore": "3.3.0",
+  "fqbn": "esp32:esp32:esp32:PartitionScheme=min_spiffs",
+  "otaSlotBytes": 1966080,
+  "hardwareTested": false,
+  "images": {
+    "mandrivnyk-esp32-ota.bin": {
+      "bytes": 1486096,
+      "sha256": "09970c3678227aeba7ff721bd9a38e5bbd1db9cd92a5fb0e6e63af1be4388d45",
+      "method": "OTA application"
+    },
+    "mandrivnyk-esp32-usb.bin": {
+      "bytes": 4194304,
+      "sha256": "abde2322fd269e02dca05661d0aff763c110e3955de3082017536a6f8f439c4d",
+      "method": "USB merged, offset 0x0, replaces NVS"
+    }
+  },
+  "firmwareSourceSHA256": {
+    "firmware/src/block_vm.h": "5f96642f44aefd855d39bcf7be5ade33b14f436588564bc70673d694b2b9c21f",
+    "firmware/src/config.h": "2c4e9c5322f1b763a9fa23ec551073aa24238604a955037223075dd1b028e381",
+    "firmware/src/control.h": "0df24ba89eff4ec2c250da07e6fefeaed630b2cdf64539f01899429d02af49bc",
+    "firmware/src/main.cpp": "9647b3eb9c29b2820e0bad62202e986213ecaf4fa8d3fc3e16354a7d44c7b01e",
+    "firmware/src/partitions.csv": "47023b53bd0581f1d9098654ed18f488125cc3d593a2f872e7e8db5838e036de",
+    "firmware/src/src.ino": "89dfb6781a6beb4a0f49ee0f574a5f1c625ddb08dae338035a96a930ebae52d6",
+    "firmware/src/web_ui.h": "ea4e70a5843b33e9fc47336b4218e01eddc2d9af7d59b65911bc49a786bcb446",
+    "firmware/src/workshop_api.h": "ca2ad9450b8a6fce5b12099a9c425babeb3e6f59b292032e951006b10878a2d0",
+    "firmware/src/workshop_assets.h": "f868d775f12b0ed6c60afc623bf3789324eb74aef093ade070fae789ee6af080"
+  }
+}
