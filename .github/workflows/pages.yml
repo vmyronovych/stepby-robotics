@@ -8,9 +8,12 @@ on:
       deploy_pages:
         description: Publish the tested classroom website to GitHub Pages
         type: boolean
-        default: false
+        default: true
 permissions:
   contents: read
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: false
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -33,11 +36,11 @@ jobs:
         working-directory: web
       - run: npm run test:e2e -- --config playwright.pins.config.js
         working-directory: web
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v4
         with:
           path: web/dist
   deploy:
-    if: github.event_name == 'workflow_dispatch' && inputs.deploy_pages
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.deploy_pages))
     needs: build
     runs-on: ubuntu-latest
     permissions:

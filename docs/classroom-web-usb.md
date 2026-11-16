@@ -71,7 +71,7 @@ npm exec vite -- preview --host 127.0.0.1 --port 4173
 
 `http://127.0.0.1:4173/` відкриває готовий сайт без API компіляції/запису. Публікується тільки `web/dist`. Його головна сторінка — USB-редактор; `#assembly` — 3D-гайд у тій самій USB-майстерні. «До блоків» закриває гайд без перезавантаження редактора. Старі `/usb.html` і `/robot.html#assembly` перенаправляються на головну сторінку зі збереженням параметрів адреси. Відносні шляхи перевіряються тестом у `/mcar/`, тому працюють у project Pages і на окремому домені.
 
-Workflow `.github/workflows/pages.yml` запускає тести та збірку. Репозиторій платформи — [vmyronovych/stepby-robotics](https://github.com/vmyronovych/stepby-robotics). Для публікації обери Settings → Pages → GitHub Actions і запусти workflow вручну з `deploy_pages=true`. Звичайні push і PR перевіряють проєкт без публікації сайту.
+Workflow `.github/workflows/pages.yml` запускає тести та збірку. Репозиторій платформи — [vmyronovych/stepby-robotics](https://github.com/vmyronovych/stepby-robotics). Один раз обери Settings → Pages → Build and deployment → Source → GitHub Actions. Кожний push у `main`, зокрема після злиття PR, автоматично публікує `web/dist`, якщо всі перевірки успішні. PR лише перевіряються; deploy дозволений виключно з `main`. Для повторного запуску обери Actions → Classroom website → Run workflow, гілку `main` та `deploy_pages=true` (увімкнено за замовчуванням). Вимкни цей прапорець для ручної перевірки без публікації. Запуски однієї гілки не переривають поточний deployment. Сайт після успішної публікації: https://vmyronovych.github.io/stepby-robotics/.
 
 Локальна стара C++-компіляція збережена для розробника: `http://127.0.0.1:5173/usb.html?transport=local`. Учням цей режим не потрібен.
 

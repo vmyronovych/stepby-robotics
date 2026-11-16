@@ -18,7 +18,7 @@ npm test --prefix web
 npm run build:site --prefix web
 ```
 
-На GitHub Pages публікується `web/dist`. У репозиторії обери **Settings → Pages → GitHub Actions**, потім запусти **Actions → Classroom website → Run workflow → deploy_pages**. Звичайні push і PR запускають перевірки без публікації. Деталі: [розгортання та USB-доступ](docs/classroom-web-usb.md).
+На GitHub Pages публікується `web/dist`. Один раз обери **Settings → Pages → Build and deployment → Source → GitHub Actions**. Після кожного push або злиття PR у `main` workflow перевіряє проєкт, збирає сайт і публікує його. PR запускають лише перевірки. Для повторної публікації обери **Actions → Classroom website → Run workflow**, гілку `main` та залиш `deploy_pages` увімкненим. Після успішного deployment сайт доступний за адресою **https://vmyronovych.github.io/stepby-robotics/**. Деталі: [розгортання та USB-доступ](docs/classroom-web-usb.md).
 
 ## Навчальний комплект «Мандрівник»
 
