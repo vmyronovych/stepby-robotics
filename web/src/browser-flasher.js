@@ -3,6 +3,7 @@ import {md5} from '@noble/hashes/legacy.js';
 import {bytesToHex} from '@noble/hashes/utils.js';
 import {PROGRAM_ADDRESS,crc32} from './usb-bytecode.js';
 import {uploadAlgorithm} from './runtime-upload.js';
+import {usbConnectionIssue} from './usb-connection-issue.js';
 const base=import.meta.env?.BASE_URL||'/';
 const manifestPath=base+'firmware/esp32-gpio-v2/manifest.json';
 export async function loadFirmware(fetcher=fetch){
@@ -39,7 +40,7 @@ export async function flashBrowserProgram({port,program,onJob=()=>{},load=loadFi
    job.phase='connecting';job.mode='detecting';emit();
    const result=await runtimeUpload({port,program,log,onProgress:progress=>{Object.assign(job,progress);emit();}});
    if(result){Object.assign(job,result);return job;}
-   job.mode='detecting';job.phase='connection-error';job.message='USB-порт відкрився, але ESP32 не відповіла на перевірку. Це не означає, що прошивка відсутня. Відпусти BOOT, перепідключи USB та повтори перевірку без запису.';
+   job.mode='detecting';job.phase='connection-error';job.connectionIssue=usbConnectionIssue();job.message=job.connectionIssue.message;
    return job;
   }
   job.mode='install';job.phase='compiling';log('Встановлення базової прошивки: один раз для цієї версії майстерні.\n');emit();
@@ -69,10 +70,13 @@ export async function flashBrowserProgram({port,program,onJob=()=>{},load=loadFi
   };
   await Promise.race([work(),new Promise((_,reject)=>{timer=setTimeout(()=>{aborted=true;reject(Error('Час запису вичерпано. Перепідключи USB та повтори.'));},180000);})]);
  }catch(error){job.failedPhase=job.phase;job.phase='error';job.message=serialError(error);
+  if(job.mode==='detecting'&&job.failedPhase==='connecting'){
+   job.phase='connection-error';job.connectionIssue=usbConnectionIssue(error);job.message=job.connectionIssue.message;
+  }
   if(job.mode==='install'&&job.failedPhase==='connecting'&&/Failed to connect|Wrong boot mode/i.test(error.message)){
    job.phase='connection-error';job.message='Не вдалося встановити зв’язок із завантажувачем ESP32. Запис не розпочався. Відпусти BOOT, перепідключи USB і спочатку перевір звичайне підключення. Причина є в діагностиці; повторне встановлення — лише окремою дією.';
   }
-  log('\n'+error.message+'\n');}
+  log('\n'+error.name+(error.stage?' ['+error.stage+']':'')+': '+error.message+'\n');}
  finally{clearTimeout(timer);try{await transport?.disconnect();}catch{}job.finished=true;job.finishedAt=Date.now();emit();}
  return job;
 }

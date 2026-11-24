@@ -38,7 +38,7 @@ async function open(port,state){
  if(state.blocked)throw state.blocked;
  if(state.stream?.failure)await close(port,state);
  if(state.stream)return state.stream;
- const opening=port.open({baudRate:115200});
+ const opening=Promise.resolve().then(()=>port.open({baudRate:115200}));
  void opening.then(()=>{if(state.blocked)void port.close().catch(()=>{});},()=>{});
  await serialStep(state,'open',()=>opening);
  try{
@@ -58,7 +58,7 @@ function serialStep(state,stage,operation){
  return Promise.race([Promise.resolve().then(operation),new Promise((_,reject)=>{timer=setTimeout(()=>{
   const error=Error('USB-з’єднання зависло на етапі «'+stage+'». Від’єднай USB, онови сторінку й підключи плату знову. Запис повторно не запускався.');
   error.code='USB_TIMEOUT';error.stage=stage;state.blocked||=error;reject(error);
- },state.timeoutMs);})]).finally(()=>clearTimeout(timer));
+ },state.timeoutMs);})]).catch(error=>{error.stage??=stage;throw error;}).finally(()=>clearTimeout(timer));
 }
 export function withSerialConnection(port,operation,log=()=>{},{timeoutMs=5000}={}){
  const state=stateFor(port);

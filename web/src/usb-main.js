@@ -12,6 +12,7 @@ import {validatePinState} from './usb-pins.js';
 import {initConnectionScreen} from './usb-connection-screen.js';
 import {probeRuntime} from './runtime-upload.js';
 import {usbDiagnostic} from './usb-diagnostics.js';
+import {usbConnectionIssue} from './usb-connection-issue.js';
 import {initUsbConsole} from './usb-console.js';
 import './usb-console.css';
 const browserMode=new URLSearchParams(location.search).get('transport')!=='local';
@@ -21,7 +22,7 @@ let chosenPort=null,choosingPort=false;
 let flasherLoadError=false;
 let installingRuntime=false;
 let wakePending=false;
-let connectionKnown=false,boardState='idle',boardCheckError='',boardLost=false,checkingBoard=false,boardEpoch=0;
+let connectionKnown=false,boardState='idle',boardCheckError='',boardCheckTitle='',boardLost=false,checkingBoard=false,boardEpoch=0;
 const supported=()=>!!navigator.serial&&window.isSecureContext;
 const EDITOR_ACCESS='mandrivnyk-editor-without-board';
 let editWithoutBoard=false;
@@ -35,25 +36,25 @@ const theme=Blockly.Theme.defineTheme('usb-workshop',{base:Blockly.Themes.Classi
 const workspace=Blockly.inject('blocklyDiv',{toolbox:usbToolbox,plugins:accordionPlugins,theme,renderer:'zelos',media:base+'media/',sounds:false,trashcan:true,scrollbars:true,grid:{spacing:24,length:2,colour:'#e3e8df'},zoom:{controls:true,wheel:true,startScale:innerWidth<760?.6:1,maxScale:1.8,minScale:.5},move:{drag:true,wheel:true,scrollbars:true}});
 new ResizeObserver(()=>Blockly.svgResize(workspace)).observe($('blocklyArea'));
 let token='',ready=false,ports=[],busy=false,polling=false,submitting=false,lastJob=null,submitted=null,saveTimer,localError='',connectionError='',jobFirstSeen=0;
-const showConnection=initConnectionScreen({choose:connectBoard,install:prepareInstallation,skip:()=>{setEditorAccess(true);save();update();notice('Можна створювати блоки й схеми без плати. Для запуску програми підключи ESP32.');},retry:()=>{boardState='idle';boardCheckError='';lastJob=null;localError='';if(chosenPort)void inspectBoard();else void connectBoard();},resized:()=>{Blockly.svgResize(workspace);workspace.scrollCenter();}});
+const showConnection=initConnectionScreen({choose:connectBoard,install:prepareInstallation,skip:()=>{setEditorAccess(true);save();update();notice('Можна створювати блоки й схеми без плати. Для запуску програми підключи ESP32.');},retry:()=>{boardState='idle';boardCheckError='';boardCheckTitle='';lastJob=null;localError='';if(chosenPort)void inspectBoard();else void connectBoard();},resized:()=>{Blockly.svgResize(workspace);workspace.scrollCenter();}});
 const project=()=>({format:'mandrivnyk-usb',version:1,name:$('projectName').value||'Моя програма',workspace:Blockly.serialization.workspaces.save(workspace)});
 const graph=()=>JSON.stringify(project().workspace);
 function notice(text){$('notice').textContent=text;}
 function diagnostic(stage,message,log='',port=chosenPort){$('connectionDiagnosticText').textContent=usbDiagnostic({stage,message,log,port});}
 function consoleConnectionLost(port,error){
  if(port!==chosenPort||boardState!=='ready'||busy||submitting)return;
- boardEpoch++;boardState='error';boardCheckError='USB-зв’язок перервався. Це не означає, що прошивку втрачено. Перепідключи USB та повтори перевірку.';
+ boardEpoch++;boardState='error';boardCheckTitle='';boardCheckError='USB-зв’язок перервався. Це не означає, що прошивку втрачено. Перепідключи USB та повтори перевірку.';
  diagnostic('читання консолі',error.message,'',port);save();update();
 }
 function prepareInstallation(){
  if(busy||submitting||checkingBoard)return;
- setEditorAccess(false);boardState='setup';localError='';boardCheckError='';
+ setEditorAccess(false);boardState='setup';localError='';boardCheckError='';boardCheckTitle='';
  renderJob({id:crypto.randomUUID(),phase:'setup-required',mode:'install',finished:true,message:'Ти обрав встановлення базової прошивки. Воно замінить програму на платі тестом блимання; блоки в редакторі залишаться. Якщо плата вже працювала, спочатку перевір USB без запису.'});update();
 }
 function requestConnectionRecheck(){
  if(!browserMode||!chosenPort){wakePending=false;return;}
  if(busy||submitting||checkingBoard||choosingPort){wakePending=true;return;}
- wakePending=false;boardEpoch++;boardState='idle';boardCheckError='';localError='';lastJob=null;
+ wakePending=false;boardEpoch++;boardState='idle';boardCheckError='';boardCheckTitle='';localError='';lastJob=null;
  diagnostic('відновлення після сну / повернення до вкладки','Закриваємо попередню USB-сесію та перевіряємо плату без запису.');
  save();update();void inspectBoard();
 }
@@ -101,7 +102,7 @@ function renderJob(job){
  lastJob=job;busy=!!job&&!job.finished;
  $('usbLog').textContent=job?.log||'';
  if(browserMode&&job?.finished&&job.phase==='connection-error'){
-  boardState='error';boardCheckError=job.message;diagnostic(job.failedPhase||job.mode||'перевірка USB',job.message,job.log);
+  boardState='error';boardCheckTitle=job.connectionIssue?.title||'';boardCheckError=job.message;diagnostic(job.failedPhase||job.mode||'перевірка USB',job.message,job.log);
  }
  if(browserMode&&job?.mode==='install'){if(job.phase==='done')job.message='Майстерню встановлено. На GPIO2 запущено тест: 0,5 секунди увімкнено, 0,5 вимкнено. Тепер склади блоки й натисни «Прошити програму».';if(job.phase==='setup-required')boardState='setup';else if(['done','runtime-error'].includes(job.phase))boardState='ready';}
 }
@@ -159,7 +160,7 @@ function renderStatus(){
 function selectBoard(port){
  if(port===chosenPort)return;
  $('remoteConnection').hidden=true;$('remoteNetwork').textContent='';$('remotePassword').textContent='';
- chosenPort=port;boardEpoch++;boardState='idle';boardCheckError='';lastJob=null;localError='';
+ chosenPort=port;boardEpoch++;boardState='idle';boardCheckError='';boardCheckTitle='';lastJob=null;localError='';
 }
 function renderConnection(){
  if(!browserMode){showConnection({state:'editor'});return;}
@@ -167,12 +168,12 @@ function renderConnection(){
  if(chosenPort&&boardState==='ready'&&(busy||submitting)&&!choosingPort)state='transferring';
  if(boardState==='error'&&!chosenPort&&boardCheckError)state='error';
  if(editWithoutBoard&&!busy&&!submitting&&!choosingPort)state='editor';
- showConnection({state,message:boardCheckError,multiple:ports.length>1,working:busy||submitting||checkingBoard,lost:boardLost});
+ showConnection({state,message:boardCheckError,errorTitle:boardCheckTitle,multiple:ports.length>1,working:busy||submitting||checkingBoard,lost:boardLost});
 }
 async function connectBoard(){
  if(busy||submitting||checkingBoard||choosingPort)return;
- setEditorAccess(false);choosingPort=true;boardCheckError='';update();
- try{await chooseBrowserPort();if(boardState==='error'){boardState='idle';boardCheckError='';}}
+ setEditorAccess(false);choosingPort=true;boardCheckError='';boardCheckTitle='';update();
+ try{await chooseBrowserPort();if(boardState==='error'){boardState='idle';boardCheckError='';boardCheckTitle='';}}
  catch(error){boardCheckError=error.name==='NotFoundError'?'Плату ще не обрано. Під’єднай кабель і спробуй ще раз.':error.name==='SecurityError'?'Браузер не дозволив USB-доступ. У класі звернися до вчителя.':error.message;}
  finally{choosingPort=false;update();void inspectBoard();}
 }
@@ -186,8 +187,8 @@ async function inspectBoard(){
   if(epoch!==boardEpoch)return;
   if(result?.compatible){boardState='ready';boardLost=false;lastJob=null;showRemoteConnection(log);diagnostic('готово',`Відповіла прошивка ${result.runtime}. Перевірка без запису.`,log,port);}
   else if(result){boardState='setup';const message=`Плата відповіла: ${result.runtime}. Потрібне оновлення базової прошивки для цієї версії майстерні.`;diagnostic('версія прошивки',message,log,port);renderJob({id:crypto.randomUUID(),phase:'setup-required',mode:'install',finished:true,log,message});}
-  else{boardState='error';boardCheckError='USB-порт відкрився, але ESP32 не відповіла на HELLO. Це не означає, що прошивка відсутня. Відпусти BOOT, перепідключи USB та повтори перевірку без запису.';diagnostic('очікування HELLO / READY',boardCheckError,log,port);}
- }catch(error){if(epoch!==boardEpoch)return;boardState='error';boardCheckError=error.code==='USB_TIMEOUT'?error.message:'Не вдалося відкрити або прочитати USB-порт. Це не означає, що прошивку втрачено. Закрий інші монітори порту, перепідключи USB та повтори перевірку.';diagnostic(error.stage||'відкриття / читання USB',`${error.name}: ${error.message}`,log,port);}
+  else{boardState='error';const issue=usbConnectionIssue();boardCheckError=issue.message;boardCheckTitle=issue.title;diagnostic('очікування HELLO / READY',boardCheckError,log,port);}
+ }catch(error){if(epoch!==boardEpoch)return;boardState='error';const issue=usbConnectionIssue(error);boardCheckError=issue.message;boardCheckTitle=issue.title;diagnostic(error.stage||'відкриття / читання USB',`${error.name}: ${error.message}`,log,port);}
  finally{checkingBoard=false;update();if(epoch!==boardEpoch)void inspectBoard();}
 }
 
@@ -208,7 +209,7 @@ async function pollBrowser(){
   $('usbPort').replaceChildren(new Option('Обрати плату…',''),...ports.map(p=>new Option(p.label,p.path)));
   $('usbPort').value=[...browserPorts].find(([,p])=>p===chosenPort)?.[0]||'';
   $('usbBadge').textContent=!ready?'USB недоступний':chosenPort?'Плату обрано':editWithoutBoard?'Без плати':'Обери USB';$('usbBadge').className='badge '+(chosenPort?'online':'offline');
- }catch(error){connectionKnown=true;boardCheckError=error.message;boardState='error';}finally{polling=false;update();void inspectBoard();}
+ }catch(error){connectionKnown=true;boardCheckTitle='';boardCheckError=error.message;boardState='error';}finally{polling=false;update();void inspectBoard();}
 }
 async function chooseBrowserPort(){
  // Must run directly in a click handler while browser user activation is present.

@@ -93,3 +93,8 @@
 .wiring-dialog .wire-colors button[aria-pressed=true]{border-color:#286f68;background:#eaf3ef;box-shadow:inset 0 0 0 1px #286f68;font-weight:700}
 .wire-colors button[aria-pressed=true] .wire-color-swatch{outline:2px solid #286f68;outline-offset:2px}
 .wiring-side .wire-color-help{font-size:11px;line-height:1.5;color:#61736e}
+
+.wiring-tools [data-multi-select][aria-pressed="true"]{background:#d5ebe5;color:#244e44;box-shadow:inset 0 0 0 2px #328f83;}
+
+.wiring-tools [data-multi-select]{display:inline-flex;align-items:center;gap:5px;white-space:nowrap;}
+@media(max-width:740px){.wiring-tools [data-multi-select]{width:28px;height:28px;padding:4px;flex-shrink:0;}.wiring-tools [data-multi-select] span{display:none;}}

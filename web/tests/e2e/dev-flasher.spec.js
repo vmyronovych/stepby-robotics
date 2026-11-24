@@ -18,7 +18,7 @@ test('failed flasher import explains recovery without blaming BOOT or writing to
  await installSerial(page,{granted:true,legacy:true});
  await page.route(/\/src\/browser-flasher\.js(?:\?.*)?$/,route=>route.fulfill({status:504,body:'Outdated Optimize Dep'}));
  await page.goto('/');
- await expect(page.locator('#connectionTitle')).toHaveText('Відновімо зв’язок',{timeout:10000});
+ await expect(page.locator('#connectionTitle')).toHaveText('Перевір інші вкладки',{timeout:10000});
  await page.locator('#connectionRecovery summary').click();await page.locator('#connectionInstall').click();
  await expect(page.locator('#setupGuide')).toBeVisible();
  await page.locator('#flashProgram').click();
@@ -28,6 +28,6 @@ test('failed flasher import explains recovery without blaming BOOT or writing to
  expect(await page.evaluate(()=>window.serialFixture.commands.every(command=>command.includes(' HELLO ')))).toBe(true);
  await expect(page.locator('#flashLabel')).toHaveText('Оновити сторінку');
  await page.locator('#flashProgram').click();
- await expect(page.locator('#connectionTitle')).toHaveText('Відновімо зв’язок',{timeout:10000});
+ await expect(page.locator('#connectionTitle')).toHaveText('Перевір інші вкладки',{timeout:10000});
  expect(await page.evaluate(()=>window.serialFixture.commands.every(command=>command.includes(' HELLO ')))).toBe(true);
 });
