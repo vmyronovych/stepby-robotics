@@ -4,9 +4,9 @@ import path from 'node:path';
 import {program as wiringProgram} from '../wiring-fixture.mjs';
 import {installSerial} from './serial-fixture.js';
 const root=path.resolve(import.meta.dirname,'../../dist');
-async function staticSite(page,{cancel=false,unsupported=false,stubFlash=false,setup=false}={}){
+async function staticSite(page,{cancel=false,unsupported=false,stubFlash=false,setup=false,openError=null}={}){
  const errors=[],requests=[];page.on('pageerror',e=>errors.push(e.message));page.on('request',r=>requests.push(r.url()));
- await installSerial(page,{cancel,unsupported,legacy:setup});
+ await installSerial(page,{cancel,unsupported,legacy:setup,openError});
  await page.route('https://classroom.test/**',async route=>{
   const url=new URL(route.request().url());if(!url.pathname.startsWith('/mcar/'))return route.fulfill({status:404,body:''});
   let name=url.pathname.slice('/mcar/'.length)||'index.html';
@@ -62,14 +62,30 @@ test('console displays only board messages, bounds history and resumes after upl
  await page.evaluate(()=>window.serialFixture.emit('MCAR_LOG d093d0bed182d0bed0b2d0be'));
  await expect(output).toContainText('Готово');expect(state.errors).toEqual([]);
 });
+
+for(const [openError,title] of [['NetworkError','USB-порт недоступний'],['InvalidStateError','USB-порт уже відкритий']])test(`${openError} explains the port conflict and recovers without installing firmware`,async({page})=>{
+ const state=await staticSite(page,{openError});await page.goto('https://classroom.test/mcar/');await page.locator('#connectionAction').click();
+ await expect(page.locator('#connectionTitle')).toHaveText(title);
+ await expect(page.locator('#connectionRecovery li').first()).toContainText('localhost');
+ await expect(page.locator('#connectionDiagnosticText')).toContainText(openError);
+ await expect(page.locator('#setupGuide')).toBeHidden();
+ expect(await page.evaluate(()=>window.serialFixture.commands)).toEqual([]);
+ await page.screenshot({path:`../validation/usb-${openError}.png`,fullPage:true});
+ await page.evaluate(()=>window.serialFixture.releasePort());await page.locator('#connectionAction').click();
+ await expect(page.locator('[data-console-status]')).toContainText('Наживо');
+ expect(await page.evaluate(()=>window.serialFixture.commands.every(command=>command.includes(' HELLO ')))).toBe(true);
+ expect(state.requests.filter(url=>url.includes('/firmware/'))).toEqual([]);expect(state.errors).toEqual([]);
+});
 test('silent board after reconnect offers connection recovery, never automatic BOOT setup',async({page})=>{
  const state=await staticSite(page);await page.goto('https://classroom.test/mcar/');
  await page.locator('#connectionAction').click();await expect(page.locator('[data-console-status]')).toContainText('Наживо');
  await page.evaluate(()=>{window.serialFixture.silence();window.serialFixture.disconnect();});
  await expect(page.locator('#app')).toBeHidden();await page.evaluate(()=>window.serialFixture.connect());
- await expect(page.locator('#connectionTitle')).toHaveText('Відновімо зв’язок',{timeout:12000});
+ await expect(page.locator('#connectionTitle')).toHaveText('Перевір інші вкладки',{timeout:12000});
  await expect(page.locator('#setupGuide')).toBeHidden();
  await expect(page.locator('#connectionDescription')).toContainText('не означає');
+ await expect(page.locator('#connectionDescription')).toContainText('Можливо');
+ await expect(page.locator('#connectionRecovery li').first()).toContainText('localhost');
  expect(await page.evaluate(()=>window.serialFixture.commands.every(command=>command.includes(' HELLO ')))).toBe(true);
  await page.evaluate(()=>window.serialFixture.ready());await page.locator('#connectionAction').click();
  await expect(page.locator('#app')).toBeVisible();expect(state.errors).toEqual([]);
@@ -82,13 +98,13 @@ test('resume reopens a stale session without USB disconnect events and never wri
  await expect.poll(()=>page.evaluate(()=>window.serialFixture.stats().openedCount)).toBeGreaterThan(before);
  await expect(page.locator('[data-console-status]')).toContainText('Наживо');
  await page.evaluate(()=>{window.serialFixture.silence();window.dispatchEvent(new PageTransitionEvent('pageshow',{persisted:true}));});
- await expect(page.locator('#connectionTitle')).toHaveText('Відновімо зв’язок',{timeout:12000});
+ await expect(page.locator('#connectionTitle')).toHaveText('Перевір інші вкладки',{timeout:12000});
  await expect(page.locator('#connectionDiagnosticText')).toContainText('HELLO');await expect(page.locator('#setupGuide')).toBeHidden();
  await page.evaluate(()=>window.serialFixture.ready());await page.locator('#connectionAction').click();await expect(page.locator('#app')).toBeVisible();
  expect(await page.evaluate(()=>window.serialFixture.commands.every(command=>command.includes(' HELLO ')))).toBe(true);
  expect(state.requests.filter(url=>url.includes('/firmware/'))).toEqual([]);expect(state.errors).toEqual([]);
  await page.setViewportSize({width:390,height:844});await page.evaluate(()=>{window.serialFixture.silence();window.dispatchEvent(new PageTransitionEvent('pageshow',{persisted:true}));});
- await expect(page.locator('#connectionTitle')).toHaveText('Відновімо зв’язок',{timeout:12000});
+ await expect(page.locator('#connectionTitle')).toHaveText('Перевір інші вкладки',{timeout:12000});
  await page.screenshot({path:'../validation/usb-recovery-mobile.png',fullPage:true});
 });
 test('cancelled chooser and unsupported browsers give actionable messages without flashing',async({page})=>{
@@ -129,11 +145,11 @@ test('static site includes the real flasher, intact firmware assets, and working
 
 test('first setup guides BOOT, recovers failed connection and announces release during writing',async({page})=>{
  const state=await staticSite(page,{setup:true});await page.addInitScript(()=>localStorage.setItem('mandrivnyk-usb-v1',JSON.stringify({format:'mandrivnyk-usb',version:1,name:'Незавершений проєкт',workspace:{blocks:{blocks:[]}}})));await page.goto('https://classroom.test/mcar/');
- await page.locator('#connectionAction').click();await expect(page.locator('#connectionTitle')).toHaveText('Відновімо зв’язок',{timeout:10000});
+ await page.locator('#connectionAction').click();await expect(page.locator('#connectionTitle')).toHaveText('Перевір інші вкладки',{timeout:10000});
  await page.locator('#connectionRecovery summary').click();await page.locator('#connectionInstall').click();
  await expect(page.locator('#flashCard')).toHaveAttribute('data-state','setup');await expect(page.locator('#setupGuide li')).toHaveCount(3);
  await expect(page.locator('#flashLabel')).toHaveText('BOOT затиснуто — встановити');await expect(page.locator('.usb-progress')).toBeHidden();
- await page.locator('#probeAgain').click();await expect(page.locator('#connectionTitle')).toHaveText('Відновімо зв’язок',{timeout:10000});expect(await page.evaluate(()=>window.setupCalls||[])).toEqual([]);
+ await page.locator('#probeAgain').click();await expect(page.locator('#connectionTitle')).toHaveText('Перевір інші вкладки',{timeout:10000});expect(await page.evaluate(()=>window.setupCalls||[])).toEqual([]);
  await page.locator('#connectionInstall').click();await page.locator('#flashProgram').click();await expect(page.locator('#bootHold')).toBeVisible();
  await expect(page.locator('#connectionTitle')).toHaveText('Відновімо зв’язок');await expect(page.locator('#setupGuide')).toBeHidden();
  expect(await page.evaluate(()=>window.setupCalls)).toEqual([true]);await page.locator('#connectionInstall').click();
@@ -154,8 +170,10 @@ test('unrecognized blinking sketch shows diagnostic recovery without fetching or
   Object.defineProperty(navigator,'serial',{configurable:true,value:{getPorts:async()=>[port],requestPort:async()=>port,addEventListener(){}}});
  });
  await page.goto('https://classroom.test/mcar/');
- await expect(page.locator('#connectionTitle')).toHaveText('Відновімо зв’язок',{timeout:10000});
- await expect(page.locator('#connectionDescription')).toContainText('не означає');await expect(page.locator('#connectionDiagnosticText')).toContainText('LED2=ON');
+ await expect(page.locator('#connectionTitle')).toHaveText('Перевір інші вкладки',{timeout:10000});
+ await expect(page.locator('#connectionDescription')).toContainText('не означає');
+ await expect(page.locator('#connectionDescription')).toContainText('Можливо');
+ await expect(page.locator('#connectionRecovery li').first()).toContainText('localhost');await expect(page.locator('#connectionDiagnosticText')).toContainText('LED2=ON');
  await expect(page.locator('#connectionAction')).toBeEnabled();await expect(page.locator('#setupGuide')).toBeHidden();
  expect(state.requests.filter(url=>url.includes('/firmware/')||url.includes('/api/'))).toEqual([]);expect(state.errors).toEqual([]);
 });

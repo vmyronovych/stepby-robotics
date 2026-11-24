@@ -1,3 +1,4 @@
+import {moveComponentGroup} from './wiring-group-move.js';
 import {expansionPinDocs} from './expansion-pin-docs.js';
 import {unavailableConnections} from './wiring-diagnostics.js';
 import {routingScene,insideObstacle,fallbackRouting} from './wiring-routing-scene.js';
@@ -52,7 +53,7 @@ export function initWiringEditor({workspace,notice}){
  document.body.append(dialog);
  const $=s=>dialog.querySelector(s),board=$('.wiring-board'),svg=$('.wiring-lines'),side=$('.wiring-side'),scroll=$('.wiring-scroll');
  const routeControls=document.createElementNS(svg.namespaceURI,'svg');routeControls.setAttribute('class','wiring-route-controls');board.append(routeControls);
- let draft,before,analysis,selection=null,pending=null,rewire=null,undo=[],redo=[],scale=.8,drag=null,audit=-1,targetWorkspace=workspace,previousFocus=null,viewer=null,viewerDialog=null,suppressPinClick=false,spaceHeld=false,ghost=null,paletteCollapsed=false,showChecks=false;
+ let draft,before,analysis,selection=null,pending=null,rewire=null,undo=[],redo=[],scale=.8,drag=null,audit=-1,targetWorkspace=workspace,previousFocus=null,viewer=null,viewerDialog=null,suppressPinClick=false,spaceHeld=false,ghost=null,paletteCollapsed=false,showChecks=false,multiSelect=false;
  $('.wiring-header').insertBefore($('.wiring-tools'),$('[data-apply]'));
  $('.wiring-feedback').prepend($('.wiring-hint'));
  $('.wiring-hint').tabIndex=0;
@@ -73,6 +74,10 @@ export function initWiringEditor({workspace,notice}){
   const b=$(selector);b.innerHTML=icon(name);b.classList.add('wiring-icon');b.setAttribute('aria-label',label);b.title=label;
  }
  for(const [selector,key]of [['[data-rotate-left]','Shift+R'],['[data-rotate-right]','R']]){const b=$(selector);b.title+=` · ${key}`;b.setAttribute('aria-keyshortcuts',key);}
+ const selectMany=el('button');selectMany.innerHTML='<svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3" stroke-dasharray="3 2"/></svg><span>Вибрати кілька</span>';selectMany.setAttribute('aria-label','Вибрати кілька');selectMany.dataset.multiSelect='';selectMany.setAttribute('aria-pressed','false');selectMany.title='Вибрати кілька компонентів · Shift + клік';$('.wiring-tools').insertBefore(selectMany,$('.wiring-feedback'));
+ selectMany.onclick=()=>{multiSelect=!multiSelect;selectMany.setAttribute('aria-pressed',String(multiSelect));hint(multiSelect?'Натискай компоненти, щоб додати або прибрати з вибору. Вимкни «Вибрати кілька», щоб перетягнути групу.':'Shift + клік — додати компонент. Тягни вибраний компонент, щоб перемістити всю групу.');};
+ function selectedIds(){return selection?.kind==='components'?selection.ids:selection?.kind==='component'?[selection.id]:[];}
+ function selectComponents(ids){selection=ids.length>1?{kind:'components',ids}:ids.length?{kind:'component',id:ids[0]}:null;}
  const arrange=el('button',undefined,'wiring-icon');arrange.dataset.arrangeWires='';arrange.innerHTML=icon('route');arrange.title='Вирівняти всі проводи автоматично';arrange.setAttribute('aria-label',arrange.title);$('.wiring-tools').insertBefore(arrange,$('.wiring-feedback'));
  arrange.onclick=()=>{if(draft.wires.some(w=>w.vertices?.length))mutate(s=>{for(const w of s.wires)delete w.vertices;},{physical:false});else drawLines();hint('Проводи прокладено автоматично. Обери провід, щоб підправити його вручну.');};
  $('[data-checks]').append(el('span',undefined,'wiring-check-count'));$('[data-impact-icon]').innerHTML=icon('impact');
@@ -179,7 +184,7 @@ export function initWiringEditor({workspace,notice}){
   const selectedTerminal=selection?.kind==='pin'?analysis.terminals.get(selection.id):null;
   const breadboardGroup=selectedTerminal?.role==='breadboard'?selectedTerminal:null;
   const issueKeys=new Set(analysis.issues.filter(i=>i.severity==='error').flatMap(i=>i.keys));
-  for(const c of board.querySelectorAll('.wiring-component'))c.dataset.selected=String(selection?.kind==='component'&&selection.id===c.dataset.component);
+  for(const c of board.querySelectorAll('.wiring-component'))c.dataset.selected=String(selectedIds().includes(c.dataset.component));
   for(const b of board.querySelectorAll('.wiring-jumper'))b.setAttribute('aria-pressed',String(selection?.kind==='jumper'&&selection.id===b.dataset.jumper));
   for(const p of board.querySelectorAll('.wire-pin')){p.setAttribute('aria-pressed',String(p.dataset.endpoint===pending||selection?.kind==='pin'&&p.dataset.endpoint===selection.id));p.dataset.bus=String(!!breadboardGroup&&analysis.terminals.get(p.dataset.endpoint)?.component.id===breadboardGroup.component.id&&analysis.terminals.get(p.dataset.endpoint)?.group===breadboardGroup.group);p.dataset.error=String(issueKeys.has(p.dataset.endpoint));p.dataset.connected=String(draft.wires.some(w=>w.a===p.dataset.endpoint||w.b===p.dataset.endpoint)||mountLinks(draft).some(pair=>pair.includes(p.dataset.endpoint)));}
  }
@@ -189,9 +194,12 @@ export function initWiringEditor({workspace,notice}){
   for(const c of [...draft.components].sort((a,b)=>(a.kind==='breadboard'?-1:0)-(b.kind==='breadboard'?-1:0))){
    const card=el('article',undefined,'wiring-component');card.dataset.component=c.id;card.dataset.kind=c.kind;card.style.left=c.x+'px';card.style.top=c.y+'px';const layout=physicalLayout(c);card.style.width=layout.width+'px';card.style.height=layout.height+'px';card.dataset.mounted=String(mounted(c));card.dataset.rotation=c.rotation??0;card.dataset.inserted=String(!!c.breadboardMount);
    card.tabIndex=0;card.setAttribute('aria-label',`Перемістити ${c.name}`);
-   card.onfocus=e=>{if(e.target!==card)return;selection={kind:'component',id:c.id};pending=null;rewire=null;renderSide();drawSelection();};
-   card.onkeydown=e=>{if(e.target!==card)return;if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)){e.preventDefault();mutate(s=>{const node=s.components.find(n=>n.id===c.id);delete node.breadboardMount;node.x=Math.max(0,Math.min(1700,node.x+(e.key==='ArrowLeft'?-20:e.key==='ArrowRight'?20:0)));node.y=Math.max(0,Math.min(1500-height(c),node.y+(e.key==='ArrowUp'?-20:e.key==='ArrowDown'?20:0)));seatComponent(s,node);});}};
-   const moveComponent=e=>{if(e.button!==0||e.target.closest('.wire-pin,.wiring-jumper')||spaceHeld)return;e.preventDefault();e.stopPropagation();selection={kind:'component',id:c.id};pending=null;rewire=null;renderSide();drawSelection();scroll.focus({preventScroll:true});drag={kind:'component',id:c.id,x:e.clientX,y:e.clientY,start:cloneWiring(draft),moved:false};card.setPointerCapture(e.pointerId);};
+   card.onfocus=e=>{if(e.target!==card)return;if(!selectedIds().includes(c.id))selectComponents([c.id]);pending=null;rewire=null;renderSide();drawSelection();};
+   card.onkeydown=e=>{if(e.target!==card)return;if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)){e.preventDefault();if(selectedIds().length>1){commit(moveComponentGroup(draft,selectedIds(),e.key==='ArrowLeft'?-20:e.key==='ArrowRight'?20:0,e.key==='ArrowUp'?-20:e.key==='ArrowDown'?20:0,routing.routes),{physical:false});return;}mutate(s=>{const node=s.components.find(n=>n.id===c.id);delete node.breadboardMount;node.x=Math.max(0,Math.min(1700,node.x+(e.key==='ArrowLeft'?-20:e.key==='ArrowRight'?20:0)));node.y=Math.max(0,Math.min(1500-height(c),node.y+(e.key==='ArrowUp'?-20:e.key==='ArrowDown'?20:0)));seatComponent(s,node);});}};
+   const moveComponent=e=>{if(e.button!==0||e.target.closest('.wire-pin,.wiring-jumper')||spaceHeld)return;e.preventDefault();e.stopPropagation();pending=null;rewire=null;
+    if(e.shiftKey||multiSelect){const ids=selectedIds();selectComponents(ids.includes(c.id)?ids.filter(id=>id!==c.id):[...ids,c.id]);scroll.focus({preventScroll:true});renderSide();drawSelection();return;}
+    if(!selectedIds().includes(c.id))selectComponents([c.id]);
+    renderSide();drawSelection();scroll.focus({preventScroll:true});drag={kind:selectedIds().length>1?'group':'component',ids:[...selectedIds()],routes:new Map(routing.routes),id:c.id,x:e.clientX,y:e.clientY,start:cloneWiring(draft),moved:false};scroll.setPointerCapture(e.pointerId);};
    card.onpointerdown=moveComponent;
    const img=el('img');img.alt=mounted(c)?'ESP32 встановлена у плату розширення':`${CATALOG[c.kind].name} · контакти на платі`;img.draggable=false;img.style.width=layout.imageWidth+'px';img.style.height=layout.imageOriginalHeight+'px';img.style.transformOrigin='0 0';img.style.transform=layout.imageTransform;img.style.top=layout.header+'px';componentArt(c).then(src=>{img.src=src;});card.append(img);
    if(c.breadboardMount){
@@ -333,7 +341,8 @@ export function initWiringEditor({workspace,notice}){
 
  }
  function renderSide(){
-  if(selection&&!((['component','jumper'].includes(selection.kind)&&draft.components.some(c=>c.id===selection.id&&(selection.kind!=='jumper'||mounted(c)||c.kind==='expansion')))||(selection.kind==='wire'&&draft.wires.some(w=>w.id===selection.id))||(selection.kind==='pin'&&analysis.terminals.has(selection.id))))selection=null;
+  if(selection?.kind==='components')selectComponents(selection.ids.filter(id=>draft.components.some(c=>c.id===id)));
+  if(selection&&selection.kind!=='components'&&!((['component','jumper'].includes(selection.kind)&&draft.components.some(c=>c.id===selection.id&&(selection.kind!=='jumper'||mounted(c)||c.kind==='expansion')))||(selection.kind==='wire'&&draft.wires.some(w=>w.id===selection.id))||(selection.kind==='pin'&&analysis.terminals.has(selection.id))))selection=null;
   $('.wiring-rotation').hidden=!selectedComponent();
   const visible=!!selection||audit>=0||showChecks;
   side.hidden=!visible;$('.wiring-layout').dataset.inspector=String(visible);
@@ -342,6 +351,7 @@ export function initWiringEditor({workspace,notice}){
   const close=button('✕',()=>{clearSelection();scroll.focus({preventScroll:true});});close.className='wiring-inspector-close';close.setAttribute('aria-label','Закрити властивості');
   const counts=analysis.issues.reduce((o,i)=>(o[i.severity]=(o[i.severity]||0)+1,o),{});
   const summary=$('[data-checks]');const label=counts.error?`Помилки: ${counts.error}`:counts.incomplete?`Незавершені з’єднання: ${counts.incomplete}`:'Перевірити з’єднання';summary.title=label;summary.setAttribute('aria-label',label);const badge=summary.querySelector('.wiring-check-count');badge.textContent=counts.error||counts.incomplete||'';badge.hidden=!badge.textContent;summary.dataset.state=counts.error?'error':counts.incomplete?'incomplete':'ready';
+  if(selection?.kind==='components'){side.append(el('h3',`Вибрано компонентів: ${selection.ids.length}`),el('p','Тягни будь-який вибраний компонент. Shift + клік змінює вибір. Компоненти, вставлені в мініборд, рухаються разом із ним.'));button('Зняти вибір',clearSelection);return;}
   if(selection?.kind==='jumper'){renderJumper(selectedComponent());return;}
   const status=el('div',counts.error?`Помилки: ${counts.error}`:counts.incomplete?`Незавершені підключення: ${counts.incomplete}`:'Відомих помилок з’єднань не знайдено','wiring-status');status.dataset.state=counts.error?'error':counts.incomplete?'incomplete':'ready';side.append(status);
   if(audit<0)renderUrgentChecks();
@@ -449,7 +459,7 @@ export function initWiringEditor({workspace,notice}){
  }
  function open(ref=null,target=workspace){
   targetWorkspace=target;before=cloneWiring(getWiring(workspace));draft=mountLegacyExpansions(before);undo=[];redo=[];pending=null;rewire=null;audit=-1;showChecks=false;$('.wiring-impact-menu').open=false;selection=ref?{kind:draft.components.some(c=>c.id===ref)?'component':'pin',id:ref}:null;previousFocus=document.activeElement;
-  dialog.showModal();render();ensureRouter();requestAnimationFrame(()=>{fit();if(ref&&selection?.kind==='pin')focusKeys([ref]);});
+  multiSelect=false;selectMany.setAttribute('aria-pressed','false');dialog.showModal();render();hint('Shift + клік або «Вибрати кілька» — вибір групи. Тягни вибраний компонент, щоб рухати групу.');ensureRouter();requestAnimationFrame(()=>{fit();if(ref&&selection?.kind==='pin')focusKeys([ref]);});
  }
  function addComponent(kind,position){
   const meta=CATALOG[kind];
@@ -467,7 +477,7 @@ export function initWiringEditor({workspace,notice}){
  for(const selector of ['[data-wire-fit]','[data-in]','[data-out]','[data-zoom]'])$('.wiring-canvas-controls').append($(selector));
  $('[data-wire-fit]').textContent='⊙';$('[data-wire-fit]').setAttribute('aria-label','Уся схема');
  const trash=button('',()=>deleteSelection(),$('.wiring-canvas-controls'));trash.setAttribute('aria-label','Видалити вибране');trash.dataset.trash='';trash.innerHTML='<svg width="24" height="28" viewBox="0 0 24 28" aria-hidden="true"><path d="M4 7h16l-1 18H5zM2 3h20v2H2zM8 0h8v2H8z" fill="currentColor"/></svg>';
- function clearSelection(){selection=null;pending=null;rewire=null;audit=-1;showChecks=false;drawLines();drawSelection();renderSide();hint('Обери компонент або контакт. Тягни фон, щоб рухати полотно.');}
+ function clearSelection(){selection=null;pending=null;rewire=null;audit=-1;showChecks=false;drawLines();drawSelection();renderSide();hint('Shift + клік або «Вибрати кілька» — вибір групи. Тягни фон, щоб рухати полотно.');}
  $('[data-palette-toggle]').onclick=()=>{
   paletteCollapsed=!paletteCollapsed;$('.wiring-palette').hidden=paletteCollapsed;$('.wiring-layout').dataset.paletteCollapsed=String(paletteCollapsed);
   $('[data-palette-toggle]').setAttribute('aria-expanded',String(!paletteCollapsed));$('[data-palette-toggle]').title=paletteCollapsed?'Розгорнути палітру компонентів':'Згорнути палітру компонентів';$('[data-palette-toggle]').setAttribute('aria-label',$('[data-palette-toggle]').title);
@@ -485,8 +495,8 @@ export function initWiringEditor({workspace,notice}){
  function deleteSelection(){
   if(!selection)return;
   if(['pin','jumper'].includes(selection.kind)){pending=null;rewire=null;drawSelection();return;}
-  const selected=selection;selection=null;pending=null;rewire=null;
-  mutate(s=>{if(selected.kind==='wire')s.wires=s.wires.filter(w=>w.id!==selected.id);else{detachChildren(s,selected.id);s.components=s.components.filter(c=>c.id!==selected.id);s.wires=s.wires.filter(w=>![w.a,w.b].some(k=>k.startsWith(selected.id+':')));for(const c of s.components)if(c.host===selected.id){c.host='';}}});
+  const selected=selection;const ids=selectedIds();selection=null;pending=null;rewire=null;
+  mutate(s=>{if(selected.kind==='wire')s.wires=s.wires.filter(w=>w.id!==selected.id);else{for(const id of ids)detachChildren(s,id);s.components=s.components.filter(c=>!ids.includes(c.id));s.wires=s.wires.filter(w=>![w.a,w.b].some(k=>ids.includes(k.split(':')[0])));for(const c of s.components)if(ids.includes(c.host)){c.host='';}}});
  }
  scroll.addEventListener('pointerdown',e=>{
   if(e.button!==0&&e.button!==1)return;
@@ -496,6 +506,8 @@ export function initWiringEditor({workspace,notice}){
  scroll.addEventListener('wheel',e=>{if(e.ctrlKey||e.metaKey){e.preventDefault();zoom(scale*Math.exp(-e.deltaY*.005),{x:e.clientX,y:e.clientY});}},{passive:false});
  dialog.addEventListener('keydown',e=>{
   if(e.isComposing||e.target.matches('input,select,textarea')||e.target.isContentEditable)return;
+  if(e.key==='Escape'&&drag?.kind==='group'){e.preventDefault();draft=drag.start;drag=null;render();return;}
+  if(e.key==='Escape'&&selection?.kind==='components'){e.preventDefault();clearSelection();return;}
   if(e.key==='Escape'&&drag?.kind==='wire-end'){e.preventDefault();cancelWireEnd();return;}
   if(e.key==='Escape'&&drag?.kind==='route'){e.preventDefault();draft=drag.start;drag=null;render();return;}
   if(e.key==='Escape'&&pending&&!$('.wiring-impact-menu').open){e.preventDefault();cancelPendingWire();return;}
@@ -520,6 +532,11 @@ export function initWiringEditor({workspace,notice}){
    hint(drag.target?(problem||`Відпусти на ${title(draft,drag.target)}`):'Перенеси кінець на інший контакт. Esc — скасувати.');return;
   }
   if(drag.kind==='route'){const original=drag.start.wires.find(w=>w.id===drag.id),b=board.getBoundingClientRect(),vertices=drag.type==='vertex'?original.vertices.map((p,i)=>i===drag.index?{x:snapRoute((e.clientX-b.left)/scale,e.altKey),y:snapRoute((e.clientY-b.top)/scale,e.altKey)}:p):moveRouteSegment(drag.points,drag.index,(drag.horizontal?dy:dx)/scale,e.altKey);if(validVertices(vertices)){draft.wires.find(w=>w.id===drag.id).vertices=vertices;drawLines();hint('Ручний маршрут · Alt вимикає прив’язку до сітки.');}else hint('Згин не може бути всередині компонента.');return;}
+  if(drag.kind==='group'){
+   draft=moveComponentGroup(drag.start,drag.ids,dx/scale,dy/scale,drag.routes);
+   for(const card of board.querySelectorAll('.wiring-component')){const c=draft.components.find(c=>c.id===card.dataset.component);card.style.left=c.x+'px';card.style.top=c.y+'px';card.dataset.inserted=String(!!c.breadboardMount);}
+   drawLines();return;
+  }
   if(drag.kind==='pan'){scroll.scrollLeft=drag.left-dx;scroll.scrollTop=drag.top-dy;return;}
   if(drag.kind==='catalog'){if(!ghost){ghost=el('img',undefined,'wiring-drag-preview');ghost.src=$(`[data-catalog="${drag.component}"] img`).src;dialog.append(ghost);}ghost.style.left=e.clientX+'px';ghost.style.top=e.clientY+'px';hint('Перетягни компонент на полотно й відпусти.');return;}
   if(drag.kind==='wire'){
@@ -535,7 +552,7 @@ export function initWiringEditor({workspace,notice}){
    for(const card of board.querySelectorAll('.wiring-component')){const n=draft.components.find(n=>n.id===card.dataset.component);card.style.left=n.x+'px';card.style.top=n.y+'px';card.dataset.inserted=String(!!n.breadboardMount);}
    drawLines();}
  });
- dialog.addEventListener('pointerup',e=>{if(!drag)return;const d=drag;if(d.kind==='wire-end'){finishWireEnd(e);return;}if(d.kind==='route'){drag=null;if(d.moved&&JSON.stringify(draft)!==JSON.stringify(d.start)){undo.push(d.start);redo=[];}render();scroll.focus({preventScroll:true});return;}ghost?.remove();ghost=null;if(d.kind==='pan'){drag=null;if(!d.moved&&!spaceHeld)clearSelection();return;}if(d.kind==='catalog'){if(d.moved){suppressPinClick=true;const r=scroll.getBoundingClientRect();if(e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom){const b=board.getBoundingClientRect();addComponent(d.component,{x:Math.max(30,(e.clientX-b.left)/scale-70),y:Math.max(30,(e.clientY-b.top)/scale-40)});}}drag=null;return;}if(d.moved&&d.kind==='wire'){
+ dialog.addEventListener('pointerup',e=>{if(!drag)return;const d=drag;if(d.kind==='group'){drag=null;if(d.moved&&JSON.stringify(draft)!==JSON.stringify(d.start)){undo.push(d.start);redo=[];}render();scroll.focus({preventScroll:true});return;}if(d.kind==='wire-end'){finishWireEnd(e);return;}if(d.kind==='route'){drag=null;if(d.moved&&JSON.stringify(draft)!==JSON.stringify(d.start)){undo.push(d.start);redo=[];}render();scroll.focus({preventScroll:true});return;}ghost?.remove();ghost=null;if(d.kind==='pan'){drag=null;if(!d.moved&&!spaceHeld)clearSelection();return;}if(d.kind==='catalog'){if(d.moved){suppressPinClick=true;const r=scroll.getBoundingClientRect();if(e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom){const b=board.getBoundingClientRect();addComponent(d.component,{x:Math.max(30,(e.clientX-b.left)/scale-70),y:Math.max(30,(e.clientY-b.top)/scale-40)});}}drag=null;return;}if(d.moved&&d.kind==='wire'){
    suppressPinClick=true;const key=pinAtPointer(e),problem=wireEndProblem({id:null,a:d.from,b:null},'b',key);drag=null;
    if(scroll.hasPointerCapture(d.pointerId))scroll.releasePointerCapture(d.pointerId);
    if(key&&!problem)choosePin(key);
@@ -543,7 +560,7 @@ export function initWiringEditor({workspace,notice}){
    pending=null;rewire=null;drawLines();drawSelection();renderSide();
   }else if(d.moved){const r=trash.getBoundingClientRect();if(e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom){draft=d.start;selection={kind:'component',id:d.id};deleteSelection();}else{const c=draft.components.find(c=>c.id===d.id);const seated=seatComponent(draft,c,d.candidate);if(seated||d.start.components.find(n=>n.id===d.id)?.breadboardMount){draft.checked=[];audit=-1;}
    undo.push(d.start);redo=[];drag=null;render();if(seated)hint(`Вставлено: ${Object.values(c.breadboardMount.holes).join(' та ')}. Ніжки з’єднані без проводів.`);}}drag=null;});
- dialog.addEventListener('pointercancel',()=>{if(['component','route'].includes(drag?.kind))draft=drag.start;drag=null;pending=null;rewire=null;suppressPinClick=true;ghost?.remove();ghost=null;render();});
+ dialog.addEventListener('pointercancel',()=>{if(['component','group','route'].includes(drag?.kind))draft=drag.start;drag=null;pending=null;rewire=null;suppressPinClick=true;ghost?.remove();ghost=null;render();});
  const entry=el('button','⌁ Підключення','icon-button');entry.id='openWiring';entry.type='button';entry.onclick=()=>open();document.querySelector('.file-actions').append(entry);
  registerWiringOpener(workspace,open);registerWiredToolbox(workspace,ref=>open(ref));
  return {open};

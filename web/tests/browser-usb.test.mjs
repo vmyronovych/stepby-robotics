@@ -81,6 +81,13 @@ test('a silent board offers connection recovery without assuming firmware is mis
  const result=await flashBrowserProgram({port:{},program:compile(usbExamples.blink.workspace),runtimeUpload:async()=>null,load:async()=>{touched=true;throw Error('must wait for setup action');},onJob:j=>jobs.push(j)});
  assert.equal(result.phase,'connection-error');assert.equal(result.finished,true);assert.equal(touched,false);
  assert.ok(jobs.some(j=>j.mode==='detecting'));assert.equal(result.mode,'detecting');assert.match(result.message,/не означає/);
+ assert.equal(result.connectionIssue?.title,'Перевір інші вкладки');assert.match(result.message,/Можливо/);
+});
+for(const [name,title] of [['NetworkError','USB-порт недоступний'],['InvalidStateError','USB-порт уже відкритий']])test(`${name} while opening reports a recoverable connection issue, not an installation error`,async()=>{
+ const port={async open(){throw new DOMException('Failed to open serial port.',name);}};
+ const result=await flashBrowserProgram({port,program:compile(usbExamples.blink.workspace),load:()=>assert.fail('must not fetch firmware')});
+ assert.equal(result.phase,'connection-error');assert.equal(result.connectionIssue?.title,title);
+ assert.match(result.message,/інша вкладка/);assert.match(result.log,new RegExp(name));assert.equal(result.finished,true);
 });
 test('failed ROM connection leaves the BOOT retry loop and exposes recovery',async()=>{
  class Transport{async disconnect(){}}

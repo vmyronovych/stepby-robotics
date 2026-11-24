@@ -10,7 +10,7 @@ export function initConnectionScreen({choose,retry,skip,resized,install}){
  $('connectionSkip').onclick=skip;
  $('connectionReselect').onclick=choose;
  $('connectionInstall').onclick=install;
- return ({state,message='',multiple=false,working=false,lost=false})=>{
+ return ({state,message='',errorTitle='',multiple=false,working=false,lost=false})=>{
   const editor=state==='editor',setup=['setup','transferring'].includes(state);
   screen.hidden=editor;app.hidden=!editor;app.inert=!editor;screen.dataset.step=state;
   $('connectionJob').hidden=!setup;
@@ -27,7 +27,7 @@ export function initConnectionScreen({choose,retry,skip,resized,install}){
    checking:['КРОК 2 · ЗНАЙОМСТВО','Плату знайдено','Перевіряємо, чи готова вона до твоїх блоків.','','Поточна програма залишається на платі.'],
    transferring:['БЛОКИ → ESP32','Передаємо твою програму','Залиш USB підключеним. Після завершення повернемося до блоків.','',''],
    setup:['БАЗОВА ПРОШИВКА','Встановлення — окрема дія','Це не перевірка USB: встановлення замінить програму на платі.','',''],
-   error:['ПІДКЛЮЧЕННЯ','Відновімо зв’язок',message,'Перевірити підключення','Закрий інші програми, що використовують USB-порт. Твої блоки збережено.'],
+   error:['ПІДКЛЮЧЕННЯ',errorTitle||'Відновімо зв’язок',message,'Перевірити підключення','Працюй із цією платою в одній вкладці майстерні. Твої блоки збережено.'],
    unsupported:['ПОТРІБЕН USB-ДОСТУП','Відкрий у Chrome або Edge','Для підключення ESP32 потрібен настільний Chrome або Edge та адреса HTTPS або localhost.','','Якщо це шкільний комп’ютер, учитель допоможе перевірити доступ до USB.'],
   }[state];
   if(copy){const [step,title,description,button,hint]=copy;
